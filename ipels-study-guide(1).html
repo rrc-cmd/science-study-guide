@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPELS Study Guide – Science Final</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap');
+  :root{--bg:#0f0f14;--surface:#1a1a24;--surface2:#22222f;--border:#2e2e40;--text:#e8e8f0;--muted:#888899;--u1:#4fc3f7;--u2:#a78bfa;--u3:#34d399;--u4:#fb923c;--u5:#f472b6;--u6:#facc15;--correct:#34d399;--wrong:#f87171;--radius:12px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;min-height:100vh}
+  h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.02em}
+  #nav{position:sticky;top:0;z-index:100;background:rgba(15,15,20,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;gap:8px;height:56px;overflow-x:auto;scrollbar-width:none}
+  #nav::-webkit-scrollbar{display:none}
+  .nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:var(--text);white-space:nowrap;margin-right:8px}
+  .nav-btn{background:none;border:1px solid var(--border);color:var(--muted);padding:5px 12px;border-radius:20px;font-size:13px;cursor:pointer;white-space:nowrap;transition:all .2s;font-family:'Space Grotesk',sans-serif;font-weight:500}
+  .nav-btn:hover{color:var(--text);border-color:#555}
+  .nav-btn.active{color:var(--bg);border-color:transparent}
+  #progress-bar-wrap{background:var(--surface);height:4px}
+  #progress-bar{height:4px;background:linear-gradient(90deg,var(--u3),var(--u1));width:0%;transition:width .5s ease}
+  #main{max-width:780px;margin:0 auto;padding:40px 24px 80px}
+  #home-screen{text-align:center;padding:60px 0}
+  .home-title{font-size:clamp(28px,6vw,48px);font-weight:700;line-height:1.1;margin-bottom:16px}
+  .home-sub{color:var(--muted);font-size:17px;margin-bottom:48px}
+  .unit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;text-align:left;margin-top:32px}
+  .unit-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;cursor:pointer;transition:transform .2s,border-color .2s;position:relative;overflow:hidden}
+  .unit-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+  .unit-card:hover{transform:translateY(-3px)}
+  .unit-card .unit-num{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+  .unit-card h3{font-size:16px;font-weight:600;margin-bottom:6px}
+  .unit-card p{font-size:13px;color:var(--muted);line-height:1.5}
+  .unit-card .cbadge{display:inline-block;margin-top:12px;font-size:12px;padding:3px 8px;border-radius:20px;background:var(--surface2);color:var(--muted)}
+  .unit-card .cbadge.done{background:rgba(52,211,153,.15);color:var(--correct)}
+  .u1 .unit-num{color:var(--u1)}.u1::before{background:var(--u1)}.u1.unit-card:hover{border-color:var(--u1)}
+  .u2 .unit-num{color:var(--u2)}.u2::before{background:var(--u2)}.u2.unit-card:hover{border-color:var(--u2)}
+  .u3 .unit-num{color:var(--u3)}.u3::before{background:var(--u3)}.u3.unit-card:hover{border-color:var(--u3)}
+  .u4 .unit-num{color:var(--u4)}.u4::before{background:var(--u4)}.u4.unit-card:hover{border-color:var(--u4)}
+  .u5 .unit-num{color:var(--u5)}.u5::before{background:var(--u5)}.u5.unit-card:hover{border-color:var(--u5)}
+  .u6 .unit-num{color:var(--u6)}.u6::before{background:var(--u6)}.u6.unit-card:hover{border-color:var(--u6)}
+  .nav-btn.u1.active{background:var(--u1);color:#000}
+  .nav-btn.u2.active{background:var(--u2);color:#000}
+  .nav-btn.u3.active{background:var(--u3);color:#000}
+  .nav-btn.u4.active{background:var(--u4);color:#000}
+  .nav-btn.u5.active{background:var(--u5);color:#000}
+  .nav-btn.u6.active{background:var(--u6);color:#000}
+  .section-header{margin-bottom:32px}
+  .section-eyebrow{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+  .section-title{font-size:clamp(22px,4vw,32px);font-weight:700;margin-bottom:8px}
+  .section-desc{color:var(--muted);font-size:15px}
+  .content-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px}
+  .content-block h3{font-size:17px;font-weight:600;margin-bottom:12px}
+  .content-block p{font-size:15px;color:#c0c0d0;line-height:1.7;margin-bottom:10px}
+  .content-block p:last-child{margin-bottom:0}
+  .vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+  @media(max-width:520px){.vocab-grid{grid-template-columns:1fr}}
+  .vocab-item{background:var(--surface2);border-radius:8px;padding:12px 14px}
+  .vocab-term{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;margin-bottom:4px}
+  .vocab-def{font-size:13px;color:var(--muted);line-height:1.5}
+  .hbox{border-radius:8px;padding:14px 16px;margin-top:12px;font-size:14px;line-height:1.6;border-left:3px solid}
+  .hbox.tip{background:rgba(79,195,247,.08);border-color:var(--u1);color:#b0d8f0}
+  .hbox.warn{background:rgba(251,146,60,.08);border-color:var(--u4);color:#f0c090}
+  .hbox.key{background:rgba(52,211,153,.08);border-color:var(--u3);color:#90d8b0}
+  .formula{background:var(--surface2);border-radius:8px;padding:14px 18px;font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;text-align:center;margin:12px 0;letter-spacing:.02em}
+  .blist{list-style:none;margin-top:10px}
+  .blist li{font-size:14px;color:#c0c0d0;padding:5px 0 5px 20px;position:relative;line-height:1.5}
+  .blist li::before{content:'→';position:absolute;left:0;color:var(--muted);font-size:12px;top:7px}
+  .checkin{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin:24px 0}
+  .checkin-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .checkin-q{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:600;margin-bottom:16px;line-height:1.4}
+  .choices{display:flex;flex-direction:column;gap:8px}
+  .cbtn{background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:11px 16px;text-align:left;font-size:14px;cursor:pointer;transition:all .18s;font-family:'Inter',sans-serif;line-height:1.4}
+  .cbtn:hover:not(:disabled){border-color:#555;background:var(--surface2)}
+  .cbtn.correct{background:rgba(52,211,153,.12);border-color:var(--correct);color:var(--correct)}
+  .cbtn.wrong{background:rgba(248,113,113,.12);border-color:var(--wrong);color:var(--wrong)}
+  .cbtn.missed{background:rgba(52,211,153,.06);border-color:rgba(52,211,153,.3);color:rgba(52,211,153,.6)}
+  .fbx{margin-top:12px;padding:12px 14px;border-radius:8px;font-size:14px;line-height:1.6;display:none}
+  .fbx.cfb{background:rgba(52,211,153,.1);color:#90d8b0}
+  .fbx.wfb{background:rgba(248,113,113,.1);color:#f0a0a0}
+  .tdiv{display:flex;align-items:center;gap:12px;margin:32px 0 20px}
+  .tdiv span{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;color:var(--muted)}
+  .tdiv::before,.tdiv::after{content:'';flex:1;height:1px;background:var(--border)}
+  .quiz-header{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  .quiz-header h3{font-size:20px;font-weight:700}
+  .qscore{font-family:'Space Grotesk',sans-serif;font-size:14px;padding:6px 14px;border-radius:20px;background:var(--surface2);font-weight:600}
+  .quiz-q{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:16px}
+  .qqnum{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .qqtext{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;margin-bottom:14px;line-height:1.5}
+  .nav-controls{display:flex;align-items:center;justify-content:space-between;margin-top:32px;flex-wrap:wrap;gap:12px}
+  .btn{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;padding:10px 20px;border-radius:8px;border:none;cursor:pointer;transition:all .2s}
+  .btn-p{background:var(--text);color:var(--bg)}.btn-p:hover{opacity:.88}
+  .btn-g{background:var(--surface);border:1px solid var(--border);color:var(--muted)}.btn-g:hover{color:var(--text);border-color:#555}
+  .ctable{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}
+  .ctable th{text-align:left;padding:10px 12px;background:var(--surface2);font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600}
+  .ctable td{padding:9px 12px;border-bottom:1px solid var(--border);color:#c0c0d0}
+  .ctable tr:last-child td{border-bottom:none}
+  .phase-row{display:flex;gap:12px;margin-top:10px}
+  .phase-box{flex:1;background:var(--surface2);border-radius:8px;padding:14px;text-align:center;font-size:13px}
+  .phase-box .pl{font-weight:700;font-family:'Space Grotesk',sans-serif;margin-bottom:6px;font-size:14px}
+  .phase-box .pd{color:var(--muted);font-size:12px}
+  .hidden{display:none!important}
+  @media(max-width:480px){#main{padding:24px 16px 80px}.content-block{padding:18px}.checkin{padding:16px}}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <div class="nav-logo">🔬 IPELS</div>
+  <button class="nav-btn" onclick="showHome()">Home</button>
+  <button class="nav-btn u1" id="nav-u1" onclick="showUnit(1)">Unit 1</button>
+  <button class="nav-btn u2" id="nav-u2" onclick="showUnit(2)">Unit 2</button>
+  <button class="nav-btn u3" id="nav-u3" onclick="showUnit(3)">Unit 3</button>
+  <button class="nav-btn u4" id="nav-u4" onclick="showUnit(4)">Unit 4</button>
+  <button class="nav-btn u5" id="nav-u5" onclick="showUnit(5)">Unit 5</button>
+  <button class="nav-btn u6" id="nav-u6" onclick="showUnit(6)">Unit 6</button>
+</nav>
+<div id="progress-bar-wrap"><div id="progress-bar"></div></div>
+<main id="main">
+<section id="home-screen">
+  <div class="home-title">Your Science Final<br>Study Guide 🚀</div>
+  <div class="home-sub">6 units · check-in questions after every concept · quiz at the end of each unit</div>
+  <div class="unit-grid">
+    <div class="unit-card u1" onclick="showUnit(1)"><div class="unit-num">Unit 1</div><h3>Science Practices</h3><p>Graphing, variables, slope, correlation vs. causation, accuracy & precision, weather vs. climate.</p><span class="cbadge" id="badge-1">Not started</span></div>
+    <div class="unit-card u2" onclick="showUnit(2)"><div class="unit-num">Unit 2</div><h3>Rates & Motion</h3><p>Speed, velocity, acceleration, position-time graphs, forces, free body diagrams, greenhouse effect.</p><span class="cbadge" id="badge-2">Not started</span></div>
+    <div class="unit-card u3" onclick="showUnit(3)"><div class="unit-num">Unit 3</div><h3>Energy & Systems</h3><p>Eg, Ek, Eel, Edis, conservation of energy, LOL charts, work, open vs. closed systems.</p><span class="cbadge" id="badge-3">Not started</span></div>
+    <div class="unit-card u4" onclick="showUnit(4)"><div class="unit-num">Unit 4</div><h3>Energy Dynamics</h3><p>Thermal, chemical & phase energy, heating curves, Q=mcΔT, endothermic vs. exothermic.</p><span class="cbadge" id="badge-4">Not started</span></div>
+    <div class="unit-card u5" onclick="showUnit(5)"><div class="unit-num">Unit 5</div><h3>Interactive Earth</h3><p>Earth's spheres, evolution, mass extinctions, carbon cycle, geological time, recipe for life.</p><span class="cbadge" id="badge-5">Not started</span></div>
+    <div class="unit-card u6" onclick="showUnit(6)"><div class="unit-num">Unit 6</div><h3>Reviving the Canary</h3><p>Climate change effects, feedback loops, adaptations vs. mitigations, renewable energy.</p><span class="cbadge" id="badge-6">Not started</span></div>
+  </div>
+</section>
+<section id="unit-screen" class="hidden"></section>
+</main>
+
+<script>
+const U={
+1:{color:'var(--u1)',label:'Unit 1',title:'Science Practices',
+topics:[
+{h:'📊 Independent vs. Dependent Variables',c:`<p><strong>Independent Variable</strong> = what YOU change. Goes on the <strong>x-axis</strong>. Memory trick: "I control it."</p><p><strong>Dependent Variable</strong> = what responds or is measured. Goes on the <strong>y-axis</strong> — it DEPENDS on the independent variable changing first.</p><div class="hbox tip">💡 Example: Testing how fertilizer amount affects plant height → fertilizer amount = independent (x-axis), plant height = dependent (y-axis).</div>`,
+ci:{q:'A scientist studies how temperature affects how fast sugar dissolves. Which is the DEPENDENT variable?',cs:['Temperature','Amount of sugar','How fast the sugar dissolves','Type of liquid used'],a:2,f:'Correct! The dissolving speed DEPENDS on the temperature. Temperature is what the scientist changes = independent.'}},
+
+{h:'📈 Making a Good Graph',c:`<ul class="blist"><li>Descriptive title (describes the relationship between both variables)</li><li>Independent variable on x-axis, dependent on y-axis</li><li>Both axes labeled with UNITS (e.g., "Time (seconds)")</li><li>Evenly spaced scale — don't skip numbers unevenly!</li><li>Points plotted accurately</li><li>Best-fit line if the data shows a linear trend</li></ul><div class="hbox warn">⚠️ The best-fit line almost NEVER goes through (0,0). Draw it through the MIDDLE of the data, balanced above and below.</div>`,
+ci:{q:'A best-fit line should go through…',cs:['The origin (0,0) every time','The middle of the data points, with roughly equal points above and below','Every single data point','Only the highest and lowest data points'],a:1,f:'A best-fit line represents the TREND — it passes through the middle, not necessarily through the origin or every point.'}},
+
+{h:'📐 Slope & Mathematical Models',c:`<p>Slope = rate of change. It tells you HOW FAST something changes.</p><div class="formula">slope = Δy / Δx = (y₂ − y₁) / (x₂ − x₁)</div><p>The linear equation:</p><div class="formula">y = mx + b</div><ul class="blist"><li><strong>m</strong> = slope (rate of change)</li><li><strong>b</strong> = y-intercept (where line crosses y-axis)</li><li><strong>x</strong> = independent variable</li><li><strong>y</strong> = dependent variable</li></ul><div class="hbox key">✅ Always use the LINE, not individual data points, to calculate slope. And always include UNITS with your slope answer (e.g., m/s, kg/L).</div>`,
+ci:{q:'A graph shows distance (m) vs. time (s). The slope calculates to 3. What does this mean?',cs:['The object moved 3 meters total','The object accelerated 3 times','The object moved at a speed of 3 m/s','The starting position was 3 meters'],a:2,f:'Slope of a distance-time graph = speed! Slope = 3 means 3 m/s — the object travels 3 meters every second.'}},
+
+{h:'🔗 Correlation vs. Causation',c:`<div class="vocab-grid"><div class="vocab-item"><div class="vocab-term">Correlation</div><div class="vocab-def">Two things change together, but one does NOT cause the other. Could be coincidence!</div></div><div class="vocab-item"><div class="vocab-term">Causation</div><div class="vocab-def">One thing DIRECTLY causes another to happen. There's a proven mechanism.</div></div></div><div class="hbox tip" style="margin-top:12px;">💡 Classic: Ice cream sales and sunburns both rise in summer — that's <strong>correlation</strong>. The sun causes both separately — that's <strong>causation</strong>. Ice cream does NOT cause sunburns!</div>`,
+ci:{q:'More shark attacks happen in months when more ice cream is sold. This is…',cs:['Causation — ice cream attracts sharks','Correlation — both happen more in summer but ice cream does not cause shark attacks','Neither — these are completely unrelated','A result from a controlled experiment'],a:1,f:'Classic correlation! Both happen more in summer (hot weather → beaches → people). But ice cream does NOT cause shark attacks. Look for the hidden third factor!'}},
+
+{h:'🎯 Accuracy vs. Precision',c:`<table class="ctable"><tr><th>Term</th><th>Meaning</th><th>Think of it as...</th></tr><tr><td><strong>Accuracy</strong></td><td>How close to the TRUE value</td><td>Hitting the bullseye</td></tr><tr><td><strong>Precision</strong></td><td>How close measurements are to EACH OTHER</td><td>Shots clustered together</td></tr></table><div class="hbox tip" style="margin-top:12px;">💡 You can be precise without being accurate (clustered shots, wrong spot). Average can be accurate but not precise (spread out but average is right). Best = high accuracy AND high precision!</div>`,
+ci:{q:'You weigh a sample 4 times and get: 9.8g, 9.7g, 9.9g, 9.8g. The true mass is 15g. How would you describe these measurements?',cs:['High accuracy, high precision','High accuracy, low precision','Low accuracy, high precision','Low accuracy, low precision'],a:2,f:'The measurements are very close to each other (high precision — consistent!), but far from the true value of 15g (low accuracy — wrong!). Consistent but wrong!'}},
+
+{h:'🌍 Weather vs. Climate + Key Vocabulary',c:`<div class="vocab-grid"><div class="vocab-item"><div class="vocab-term">Weather</div><div class="vocab-def">Short-term atmospheric conditions right now or today (rain, wind, temperature).</div></div><div class="vocab-item"><div class="vocab-term">Climate</div><div class="vocab-def">Long-term average weather patterns over 30+ years in an area.</div></div><div class="vocab-item"><div class="vocab-term">Greenhouse Effect</div><div class="vocab-def">Greenhouse gases (CO₂, CH₄, etc.) trap infrared heat in Earth's atmosphere.</div></div><div class="vocab-item"><div class="vocab-term">Albedo</div><div class="vocab-def">Reflectivity. Ice = high albedo (reflects light). Asphalt = low albedo (absorbs light).</div></div><div class="vocab-item"><div class="vocab-term">Anthropogenic</div><div class="vocab-def">Caused by human activity.</div></div><div class="vocab-item"><div class="vocab-term">Carbon Footprint</div><div class="vocab-def">Total greenhouse gases produced by a person or activity.</div></div></div>`,
+ci:{q:'"It snowed in April — proof that global warming is fake!" What is wrong with this statement?',cs:['Nothing — it is a valid scientific argument','One weather event (short-term) is not the same as climate (long-term trends over decades)','April snow is impossible if global warming is real','Global warming only affects tropical regions'],a:1,f:'Classic misconception! One weather event proves nothing about climate. Climate = average patterns over 30+ years. Scientists use long-term data trends, not one cold day.'}}
+],
+quiz:[
+{q:'In an experiment, what variable goes on the x-axis?',cs:['Dependent variable','Independent variable','Control variable','The variable that changes the most'],a:1,f:'Independent variable → x-axis. Dependent variable → y-axis. "I control the independent variable."'},
+{q:'What does the slope of a best-fit line represent?',cs:['The y-intercept','The starting value','The rate of change between the two variables','The total area under the graph'],a:2,f:'Slope = rate of change (Δy/Δx). It tells you how fast the dependent variable changes per unit of independent variable.'},
+{q:'A distance-time graph has slope 4 m/s and y-intercept 2 m. What is the equation?',cs:['y = 2x + 4','distance = 4(time) + 2','time = 4(distance) + 2','y = 4 + 2x + b'],a:1,f:'y = mx + b → distance = 4(time) + 2. Dependent variable = slope × independent variable + y-intercept.'},
+{q:'Researchers notice cities with more hospitals have more deaths. This is…',cs:['Causation — hospitals cause deaths','Correlation — bigger cities have both more hospitals and more deaths, but hospitals do not cause death','A controlled experiment proving hospitals are dangerous','Neither — there is no pattern here'],a:1,f:'Correlation! Bigger populations need more hospitals AND have more deaths — but hospitals do not cause death. There is a hidden third variable (population size).'},
+{q:'A dart player throws 10 darts. All land in a tight cluster in the wrong corner, far from the bullseye. This is…',cs:['High accuracy, high precision','High accuracy, low precision','Low accuracy, high precision','Low accuracy, low precision'],a:2,f:'Tight cluster = high precision (consistent). Far from bullseye = low accuracy (not correct). Consistent but wrong!'}
+]},
+
+2:{color:'var(--u2)',label:'Unit 2',title:'Rates & Motion',
+topics:[
+{h:'🏃 Motion Vocabulary',c:`<div class="vocab-grid"><div class="vocab-item"><div class="vocab-term">Distance</div><div class="vocab-def">Total path traveled. Always positive. No direction (scalar).</div></div><div class="vocab-item"><div class="vocab-term">Displacement (Δx)</div><div class="vocab-def">Straight-line change from start to end. Can be negative. Has direction (vector). Δx = x₂ − x₁</div></div><div class="vocab-item"><div class="vocab-term">Speed</div><div class="vocab-def">How fast (distance ÷ time). No direction.</div></div><div class="vocab-item"><div class="vocab-term">Velocity (v)</div><div class="vocab-def">Speed + direction. + or − shows direction. v = Δx/Δt</div></div><div class="vocab-item"><div class="vocab-term">Acceleration (a)</div><div class="vocab-def">Rate of change in velocity. Can mean speeding up, slowing down, or turning. a = Δv/Δt</div></div><div class="vocab-item"><div class="vocab-term">Reference Point</div><div class="vocab-def">Fixed starting point used to measure position.</div></div></div><div class="hbox tip" style="margin-top:12px;">💡 Walk 5m east then 5m west → Distance = 10m (total path), Displacement = 0m (ended where you started).</div>`,
+ci:{q:'A runner jogs 400m around a track and ends exactly where they started. What is their displacement?',cs:['400 m','800 m','0 m','Cannot be determined without speed'],a:2,f:'Displacement = final position − starting position. They ended where they started → Δx = 0! Distance was 400m, but displacement is 0.'}},
+
+{h:'📊 Position-Time (x-t) Graphs',c:`<p>The <strong>SLOPE of an x-t graph = velocity</strong>. Steeper slope = faster speed.</p><table class="ctable"><tr><th>Graph shape</th><th>What it means</th></tr><tr><td>Horizontal (flat) line</td><td>Object NOT moving (v = 0)</td></tr><tr><td>Straight line going up (+)</td><td>Constant positive velocity</td></tr><tr><td>Straight line going down (−)</td><td>Constant negative velocity</td></tr><tr><td>Curve getting steeper</td><td>Speeding up (accelerating)</td></tr><tr><td>Curve getting flatter</td><td>Slowing down</td></tr></table><div class="hbox warn" style="margin-top:10px;">⚠️ Steeper slope = greater velocity. Compare slopes to compare speeds of different objects on the same graph.</div>`,
+ci:{q:'On a position-time graph, what does a HORIZONTAL (flat) line mean?',cs:['The object is moving at maximum speed','The object is not moving — velocity = 0','The object is accelerating','The object moved in the negative direction'],a:1,f:'A flat line means position is NOT changing over time. No change in position = not moving. Velocity = 0.'}},
+
+{h:'📈 Velocity-Time (v-t) Graphs',c:`<p>The <strong>SLOPE of a v-t graph = acceleration</strong>.</p><p>The <strong>AREA under a v-t graph = displacement</strong>.</p><table class="ctable"><tr><th>Graph shape</th><th>What it means</th></tr><tr><td>Horizontal line above 0</td><td>Constant positive velocity (no acceleration)</td></tr><tr><td>Horizontal line below 0</td><td>Constant negative velocity</td></tr><tr><td>Line sloping upward</td><td>Positive acceleration (speeding up)</td></tr><tr><td>Line sloping downward</td><td>Negative acceleration (slowing down)</td></tr><tr><td>Flat line ON zero</td><td>Object is not moving</td></tr></table>`,
+ci:{q:'On a velocity-time graph, a line slopes DOWNWARD from positive velocity toward zero. This means…',cs:['The object is speeding up in the positive direction','The object is slowing down','The object reversed direction suddenly','The object has zero acceleration'],a:1,f:'Downward slope on a v-t graph = negative acceleration = the object is SLOWING DOWN. Its velocity is decreasing toward zero.'}},
+
+{h:'🧮 Motion Formulas',c:`<div class="formula">v = Δx / Δt = (x₂ − x₁) / (t₂ − t₁)</div><div class="formula">a = Δv / Δt = (v₂ − v₁) / (t₂ − t₁)</div><div class="formula">Average Speed = total distance / total time</div><div class="hbox key">✅ Always include units! Velocity → m/s, Acceleration → m/s²</div>`,
+ci:{q:'A car goes from 0 m/s to 20 m/s in 4 seconds. What is its acceleration?',cs:['80 m/s²','5 m/s²','0.2 m/s²','16 m/s²'],a:1,f:'a = (v₂−v₁)/(t₂−t₁) = (20−0)/(4−0) = 20/4 = 5 m/s². The car gains 5 m/s of speed every second.'}},
+
+{h:'⚖️ Forces & Free Body Diagrams',c:`<div class="vocab-grid"><div class="vocab-item"><div class="vocab-term">Balanced Forces</div><div class="vocab-def">Equal and opposite forces. Net force = 0. Object stays still OR keeps constant velocity — NO change in motion.</div></div><div class="vocab-item"><div class="vocab-term">Unbalanced Forces</div><div class="vocab-def">Forces NOT equal. Net force ≠ 0. Object ACCELERATES (speeds up, slows down, or turns).</div></div></div><div class="formula">ΣF (Net Force) = sum of all forces</div><div class="hbox tip" style="margin-top:10px;">💡 Free Body Diagrams: draw a dot for the object. Arrows point AWAY from the dot in the direction of each force. Longer arrow = stronger force. Equal arrows with tick marks = balanced.</div>`,
+ci:{q:'A hockey puck slides across frictionless ice at a constant velocity. What can you say about the forces acting on it?',cs:['Forces are unbalanced, causing acceleration','Forces are balanced — net force = 0, no acceleration','There must be no forces at all acting on it','The puck must be slowing down gradually'],a:1,f:'Constant velocity = no acceleration = balanced forces (ΣF = 0). On frictionless ice, no net force is needed to keep it moving. Newton\'s first law!'}},
+
+{h:'🌡️ Greenhouse Effect',c:`<ul class="blist"><li>UV energy from the Sun enters Earth's atmosphere</li><li>Earth's surface absorbs energy and converts it to infrared (IR) heat</li><li>Earth reradiates the heat upward</li><li>Greenhouse gases (CO₂, CH₄, H₂O, N₂O, CFCs) TRAP the IR heat</li><li>Heat is re-emitted back toward Earth — warming the planet</li></ul><div class="hbox warn" style="margin-top:10px;">⚠️ Main greenhouse gases to know: CO₂, CH₄ (methane), H₂O vapor, N₂O, CFCs. Nitrogen (N₂) and Oxygen (O₂) are NOT greenhouse gases.</div><div class="hbox key" style="margin-top:8px;">✅ Human CO₂ emissions are non-linear — the rate of warming is ACCELERATING, not staying steady.</div>`,
+ci:{q:'Which gas is NOT a greenhouse gas?',cs:['Carbon dioxide (CO₂)','Methane (CH₄)','Nitrogen (N₂)','Water vapor (H₂O)'],a:2,f:'Nitrogen (N₂) makes up 78% of our atmosphere but is NOT a greenhouse gas. It does not trap infrared heat. The main greenhouse gases are CO₂, CH₄, H₂O vapor, N₂O, and CFCs.'}}
+],
+quiz:[
+{q:'A bicycle travels 24 km in 60 minutes. What is its average speed?',cs:['24 km/h','0.4 km/h','12 km/h','1440 km/h'],a:0,f:'24 km / 1 hour = 24 km/h. (60 minutes = 1 hour — always convert units first!)'},
+{q:'You walk 3 m east, then 3 m west, ending where you started. What is your displacement?',cs:['6 m','3 m','0 m','1.5 m'],a:2,f:'Displacement = final position − start. You ended where you started → 0m. Distance = 6m though (total path)!'},
+{q:'When forces acting on an object are BALANCED, the object will…',cs:['Always be at rest','Always be moving fast','Never change its velocity','Always accelerate in the direction of the larger force'],a:2,f:'Balanced forces = no change in velocity. The object could be at rest OR moving at constant velocity — but it will NOT speed up or slow down.'},
+{q:'On a position-time (x-t) graph, a STEEPER slope means…',cs:['Greater acceleration','Greater velocity','Less force acting on the object','The object went backward'],a:1,f:'Slope of x-t graph = velocity. Steeper slope = bigger slope value = greater velocity (faster!)'},
+{q:'A car\'s velocity changes from 30 m/s to 10 m/s over 5 seconds. What is its acceleration?',cs:['+4 m/s²','-4 m/s²','+8 m/s²','-8 m/s²'],a:1,f:'a = (10−30)/(5−0) = −20/5 = −4 m/s². Negative because the car is SLOWING DOWN (decelerating). Negative acceleration = deceleration.'}
+]},
+
+3:{color:'var(--u3)',label:'Unit 3',title:'Energy & Systems',
+topics:[
+{h:'⚡ The Four Energy Storage Modes (Unit 3)',c:`<div class="vocab-grid"><div class="vocab-item"><div class="vocab-term">Gravitational PE (Eg)</div><div class="vocab-def">Stored due to HEIGHT. Depends on mass, gravity (9.8), and height. Eg = mgh</div></div><div class="vocab-item"><div class="vocab-term">Kinetic Energy (Ek)</div><div class="vocab-def">Energy of MOTION. Depends on mass and velocity. Ek = ½mv² (velocity is SQUARED!)</div></div><div class="vocab-item"><div class="vocab-term">Elastic PE (Eel)</div><div class="vocab-def">Stored in a STRETCHED or COMPRESSED object. Springs, rubber bands, bows.</div></div><div class="vocab-item"><div class="vocab-term">Dissipated Energy (Edis)</div><div class="vocab-def">Energy that spreads out and becomes hard to use. Heat from friction, sound. NOT destroyed — just not useful anymore.</div></div></div>`,
+ci:{q:'A stretched rubber band about to be released has what type of energy?',cs:['Kinetic energy','Gravitational potential energy','Elastic potential energy','Dissipated energy'],a:2,f:'Eel = elastic potential energy! It\'s stored in the SHAPE of the stretched object. When released, it converts to kinetic energy (Ek).'}},
+
+{h:'🔢 Energy Formulas',c:`<div class="formula">Eg = mgh</div><p style="text-align:center;color:var(--muted);font-size:13px;margin-bottom:12px;">m = mass (kg), g = 9.8 m/s² on Earth, h = height (m)</p><div class="formula">Ek = ½mv²</div><p style="text-align:center;color:var(--muted);font-size:13px;margin-bottom:12px;">m = mass (kg), v = velocity (m/s) — squared!</p><div class="hbox warn">⚠️ Velocity is SQUARED in Ek. If you double the speed, kinetic energy goes up by 4×! Big deal.</div><div class="hbox key" style="margin-top:8px;">✅ Example: 5 kg, 10 m high → Eg = 5 × 9.8 × 10 = 490 J<br>4 kg at 3 m/s → Ek = ½ × 4 × 9 = 18 J</div>`,
+ci:{q:'A 3 kg ball is held 10 m above the ground on Earth (g=9.8). What is its gravitational potential energy?',cs:['30 J','294 J','3 J','98 J'],a:1,f:'Eg = mgh = 3 × 9.8 × 10 = 294 J. Remember: g = 9.8 on Earth, always!'}},
+
+{h:'♻️ Law of Conservation of Energy',c:`<p>Energy cannot be created or destroyed — only <strong>transferred</strong> or <strong>transformed</strong> into other forms.</p><div class="formula">Total Energy (initial) = Total Energy (final)</div><div class="hbox key">✅ Roller coaster:<br>Top of hill = max Eg, min Ek (barely moving)<br>Bottom of hill = max Ek, min Eg (fastest)<br>Total energy = SAME throughout (if no friction)<br><br>With friction → some Edis (heat, sound) but TOTAL is still conserved!</div>`,
+ci:{q:'A ball starts with 500 J of gravitational PE at the top of a ramp. At the bottom, it has 420 J of kinetic energy. Where did the other 80 J go?',cs:['It was permanently destroyed','It became dissipated energy (heat and sound from friction)','It became elastic potential energy in the ball','It disappeared into the atmosphere'],a:1,f:'Energy is ALWAYS conserved! The 80 J became dissipated energy — heat from friction and sound. It\'s still in the universe, just not useful. Energy cannot be created or destroyed!'}},
+
+{h:'📦 Systems & LOL Charts',c:`<p>A <strong>system</strong> = the group of objects you choose to study.</p><div class="vocab-grid"><div class="vocab-item"><div class="vocab-term">Open System</div><div class="vocab-def">Energy CAN enter or leave from the outside environment.</div></div><div class="vocab-item"><div class="vocab-term">Closed System</div><div class="vocab-def">No energy enters or leaves — it stays inside the system boundaries.</div></div></div><p style="margin-top:14px;"><strong>LOL Charts</strong> (Energy Bar Charts) show energy changes: Before → Transfer → After</p><ul class="blist"><li>Left "L" = bar chart showing STARTING energy in each mode</li><li>Middle "O" = lists what's in the system; shows ΔE (energy entering/leaving)</li><li>Right "L" = bar chart showing ENDING energy</li><li>Charts are QUALITATIVE (relative bar heights — no exact numbers needed)</li></ul>`,
+ci:{q:'In an LOL chart for a ball rolling down a ramp (ignore friction), how do the energy bars change from left to right?',cs:['Eg increases, Ek decreases','Eg decreases, Ek increases','Both Eg and Ek increase together','Both stay the same throughout'],a:1,f:'As the ball descends, height decreases → Eg drops. Speed increases → Ek rises. Total stays same. Energy transforms from gravitational PE to kinetic energy!'}},
+
+{h:'💪 Work',c:`<div class="formula">Work (W) = Force × Distance = F × d</div><ul class="blist"><li>Work IS done when: force causes movement in the SAME direction as the force</li><li>Work is NOT done when: object doesn't move, or force is perpendicular to motion</li></ul><div class="hbox warn">⚠️ Holding a heavy box still = NO work (no movement). Pushing a wall that doesn't move = NO work done (no displacement). Work requires BOTH force AND movement.</div><p style="margin-top:10px;">Work = change in energy (ΔE). More work done = more energy transferred to the object.</p>`,
+ci:{q:'Which of the following is an example where WORK is being done?',cs:['Holding a 20 kg box still in your arms','Pushing against a wall that does not move','Lifting a box 2 meters off the ground','A book sitting on a shelf'],a:2,f:'Lifting the box: force is applied (upward) AND movement happens in the direction of force → work done! The others have no movement or no displacement.'}}
+],
+quiz:[
+{q:'What is the kinetic energy of a 6 kg object moving at 4 m/s?',cs:['24 J','48 J','96 J','12 J'],a:1,f:'Ek = ½mv² = ½ × 6 × 16 = 48 J. Remember: square velocity FIRST (4² = 16), then multiply by mass and ½.'},
+{q:'According to conservation of energy, when a falling ball\'s gravitational PE decreases…',cs:['Energy is destroyed in the process','Kinetic energy increases by the same amount','Work becomes negative','The ball gains mass from the gravitational field'],a:1,f:'Energy converts from Eg to Ek. Total energy is constant. What goes down in Eg goes up in Ek (ignoring friction).'},
+{q:'Which energy storage mode is found in a compressed spring?',cs:['Kinetic energy','Gravitational potential energy','Elastic potential energy','Dissipated energy'],a:2,f:'Eel = elastic potential energy! Springs (and rubber bands, bows) store energy in their compressed or stretched shape.'},
+{q:'A 2 kg ball is at 15 m height on Earth (g=9.8). What is its Eg?',cs:['30 J','294 J','147 J','19.6 J'],a:1,f:'Eg = mgh = 2 × 9.8 × 15 = 294 J.'},
+{q:'In a closed system with NO friction, as an object falls, what happens to TOTAL energy?',cs:['It increases as speed increases','It decreases as height decreases','It stays the same — just changes form','It converts to mass (E=mc²)'],a:2,f:'Conservation of energy! Total energy (Eg + Ek) stays constant. Energy just changes form — Eg converts to Ek — not total amount.'}
+]},
+
+4:{color:'var(--u4)',label:'Unit 4',title:'Energy Dynamics',
+topics:[
+{h:'🔬 Unit 4 Energy Storage Modes',c:`<div class="vocab-grid"><div class="vocab-item"><div class="vocab-term">Thermal Energy (Eth)</div><div class="vocab-def">Heat energy stored in moving particles. Higher temp = faster particles = more Eth. Always moves HOT → COLD.</div></div><div class="vocab-item"><div class="vocab-term">Chemical Energy (Ech)</div><div class="vocab-def">Stored in chemical BONDS. Released or absorbed during chemical reactions. Food, batteries, fuel.</div></div><div class="vocab-item"><div class="vocab-term">Phase Energy (Eph)</div><div class="vocab-def">Stored in particle arrangement/spacing. ALL matter has it. More spacing = more Eph.</div></div><div class="vocab-item"><div class="vocab-term">Dissipated Energy (Edis)</div><div class="vocab-def">Energy no longer useful. Heat from friction, sound. Still exists, just scattered.</div></div></div><div class="phase-row" style="margin-top:14px;"><div class="phase-box"><div class="pl">🧊 Solid</div><div class="pd">Particles packed tightly<br>Low Eph · Low Eth</div></div><div class="phase-box"><div class="pl">💧 Liquid</div><div class="pd">Particles looser<br>Medium Eph · Medium Eth</div></div><div class="phase-box"><div class="pl">☁️ Gas</div><div class="pd">Particles far apart<br>Very High Eph · High Eth</div></div></div>`,
+ci:{q:'Which state of matter has the HIGHEST phase energy (Eph)?',cs:['Solid','Liquid','Gas','They all have equal Eph'],a:2,f:'Gas! Particles are far apart with lots of freedom of movement = highest phase energy. More spacing = more Eph. Solids have the least (particles packed tightly).'}},
+
+{h:'🌡️ Energy Transfer Types (Radiating, Working, Heating)',c:`<table class="ctable"><tr><th>Type</th><th>Symbol</th><th>What it is</th><th>Examples</th></tr><tr><td><strong>Radiating</strong></td><td>R</td><td>Energy via electromagnetic waves</td><td>Microwave, X-rays, sunlight, phone flashlight</td></tr><tr><td><strong>Working</strong></td><td>W</td><td>Force × Distance moves an object</td><td>Lifting a box, pushing a cart, sound vibrating air</td></tr><tr><td><strong>Heating</strong></td><td>Q</td><td>Adding or removing heat (temperature difference)</td><td>Boiling water, touching a hot spoon, rubbing hands</td></tr></table>`,
+ci:{q:'You rub your hands together and they feel warm. What type of energy transfer happened?',cs:['Radiating only (R)','Working only (W)','Heating only (Q)','Both Working (W) and Heating (Q)'],a:3,f:'Both! Working (W) = you applied force over a distance (rubbing). That work transferred energy, becoming Heating (Q) = thermal energy in your hands. Work can cause heating!'}},
+
+{h:'🧪 The Q = mcΔT Formula',c:`<div class="formula">Q = mc∆T</div><ul class="blist"><li><strong>Q</strong> = heat energy transferred (Joules, calories, or Calories)</li><li><strong>m</strong> = mass of substance (grams)</li><li><strong>c</strong> = specific heat capacity (resistance to temperature change)</li><li><strong>ΔT</strong> = change in temperature = T₂ − T₁ (in °C)</li></ul><div class="hbox key">✅ Water's specific heat: c = 4.184 J/g·°C = 1 cal/g·°C = 0.001 Cal/g·°C<br><br>Cheeto Lab: energy from burning food = heat transferred to water. Measure mass and ΔT of water to find calories in food!</div><div class="hbox tip" style="margin-top:8px;">💡 Higher specific heat = harder to heat up. Water is very hard to heat (high c). Sand is easy to heat (low c) — that's why beaches feel hot but oceans stay cool!</div>`,
+ci:{q:'You heat 50g of water and it rises from 20°C to 27°C. Using c = 4.184 J/g·°C, how much heat energy was added?',cs:['146.44 J','1463 J','20920 J','565 J'],a:1,f:'Q = mcΔT = 50 × 4.184 × (27−20) = 50 × 4.184 × 7 = 1464.4 J ≈ 1463 J. Multiply mass × specific heat × temperature change!'}},
+
+{h:'📉 Heating Curves: What They Show',c:`<p>A heating curve graphs temperature vs. heat added as a substance changes phases (e.g., ice → water → steam).</p><div class="hbox key">✅ Reading the heating curve for water:<br><br><strong>Segment 1</strong> — Solid ice heating up → Eth ↑, Eph stays same<br><strong>Segment 2 (FLAT at 0°C)</strong> — Melting → Eph ↑, Eth stays FLAT (no temp change!)<br><strong>Segment 3</strong> — Liquid water heating → Eth ↑<br><strong>Segment 4 (FLAT at 100°C)</strong> — Boiling → Eph ↑, Eth stays FLAT (no temp change!)<br><strong>Segment 5</strong> — Steam/gas heating → Eth ↑</div><div class="hbox warn" style="margin-top:8px;">⚠️ FLAT parts = phase changes. Temperature STAYS CONSTANT during melting and boiling. All energy goes toward breaking intermolecular forces (raising Eph), not raising temperature.</div><div class="vocab-grid" style="margin-top:12px;"><div class="vocab-item"><div class="vocab-term">Endothermic</div><div class="vocab-def">Heat goes INTO the system. Melting, evaporating. Eph increases.</div></div><div class="vocab-item"><div class="vocab-term">Exothermic</div><div class="vocab-def">Heat LEAVES the system. Freezing, condensing. Eph decreases.</div></div></div>`,
+ci:{q:'On a heating curve for water, the line is FLAT at 100°C. What is happening?',cs:['The water stopped absorbing energy entirely','Water is boiling — Eph increases while temperature holds constant','Temperature is increasing very slowly — the graph just looks flat','Chemical bonds in water molecules are breaking'],a:1,f:'The flat line at 100°C = boiling point! All energy goes into breaking intermolecular forces → Eph increases. Temperature stays at 100°C until ALL water becomes steam. Then it heats up as gas.'}}
+],
+quiz:[
+{q:'What does the "c" represent in Q = mcΔT?',cs:['Calories consumed','Specific heat capacity','Change in temperature','Chemical energy stored'],a:1,f:'c = specific heat capacity — how much energy it takes to raise 1g of the substance by 1°C. Water\'s c = 4.184 J/g·°C.'},
+{q:'During a phase change (like melting), what happens to TEMPERATURE?',cs:['It rises sharply as energy is added','It drops then rises again','It stays constant — all energy goes to changing phase','It doubles at the melting point'],a:2,f:'Temperature stays constant during phase changes! All energy goes toward breaking/forming intermolecular bonds (changing Eph), NOT raising temperature.'},
+{q:'Sand heats up faster than water in the sun. This means sand has a _____ specific heat capacity.',cs:['Higher — harder to heat','Lower — easier to heat','Equal to water','Unrelated to its heating rate'],a:1,f:'Lower specific heat = easier to heat up. Sand has a LOWER c than water. Water resists temperature change (high c). That\'s why oceans moderate coastal temperatures!'},
+{q:'100g of water heats from 20°C to 30°C (c = 4.184 J/g·°C). How much energy was added?',cs:['418.4 J','4184 J','20920 J','41.84 J'],a:1,f:'Q = mcΔT = 100 × 4.184 × (30−20) = 100 × 4.184 × 10 = 4,184 J. Mass × specific heat × temperature change.'},
+{q:'What energy mode CHANGES during a phase change like melting?',cs:['Thermal energy only','Chemical energy only','Phase energy only — thermal stays flat','All three energy modes change equally'],a:2,f:'During a phase change, phase energy (Eph) increases (endothermic) or decreases (exothermic). Thermal energy stays FLAT (that\'s why the heating curve is flat!). Chemical energy doesn\'t change.'}
+]},
+
+5:{color:'var(--u5)',label:'Unit 5',title:'Interactive Earth',
+topics:[
+{h:"🌍 Earth's Four Spheres",c:`<div class="vocab-grid"><div class="vocab-item"><div class="vocab-term">🌱 Biosphere</div><div class="vocab-def">ALL living things. From bacteria to blue whales. Takes in nutrients and produces waste.</div></div><div class="vocab-item"><div class="vocab-term">🪨 Geosphere</div><div class="vocab-def">Rocks, soil, landforms. All of Earth's layers (inner core → crust). Includes tectonic plates.</div></div><div class="vocab-item"><div class="vocab-term">💧 Hydrosphere</div><div class="vocab-def">ALL of Earth's water: oceans, rivers, lakes, groundwater, ice caps, water vapor.</div></div><div class="vocab-item"><div class="vocab-term">💨 Atmosphere</div><div class="vocab-def">Layer of gases. 78% N₂, 21% O₂, 0.9% Ar, and 0.1% other gases (including all greenhouse gases).</div></div></div><div class="hbox tip" style="margin-top:12px;">💡 The spheres interact constantly! Volcanoes (geosphere) release CO₂ (atmosphere) → absorbed by oceans (hydrosphere) → used by plants (biosphere). Everything connects!</div>`,
+ci:{q:'A fish living in the ocean belongs to which sphere?',cs:['Geosphere','Hydrosphere','Biosphere','Atmosphere'],a:2,f:'The fish is a LIVING thing → biosphere! The water it lives in = hydrosphere. The ocean floor = geosphere. Multiple spheres share the same space and interact.'}},
+
+{h:'⏳ Geological Time Scale',c:`<table class="ctable"><tr><th>Period</th><th>When</th><th>Key Events</th></tr><tr><td><strong>Precambrian</strong></td><td>4.54 billion → 540 million years ago (~88% of Earth's history!)</td><td>First life: bacteria → multicellular organisms</td></tr><tr><td><strong>Paleozoic</strong> (Old Life)</td><td>540 → 250 million years ago</td><td>First land plants, amphibians, reptiles. Ends with Permian Extinction.</td></tr><tr><td><strong>Mesozoic</strong> (Middle Life)</td><td>250 → 65 million years ago</td><td>Dinosaurs, mammals, birds, flowering plants. Ends with K-Pg extinction.</td></tr><tr><td><strong>Cenozoic</strong> (New Life)</td><td>65 million years ago → present</td><td>Grass, humans evolve. Possible 6th mass extinction happening NOW.</td></tr></table><div class="hbox key" style="margin-top:10px;">✅ Clock analogy: If Earth's 4.5 billion years = 24 hours, humans only appear in the very last few seconds before midnight!</div>`,
+ci:{q:'Which time period covers about 88% of all of Earth\'s history?',cs:['Paleozoic','Cenozoic','Mesozoic','Precambrian'],a:3,f:'Precambrian! From Earth\'s formation (4.54 billion years ago) to 540 million years ago = nearly 4 billion years. Life was mostly microscopic bacteria during this HUGE span of time.'}},
+
+{h:'🐟 Evolution & Natural Selection',c:`<p><strong>Evolution</strong> = change in how a living thing looks or acts over time. Four key factors:</p><ul class="blist"><li><strong>Time</strong> — evolution is usually slow (millions of years)</li><li><strong>Pressure</strong> — predators, environment changes force adaptation</li><li><strong>Reproduction</strong> — traits pass to offspring</li><li><strong>Variation + Natural Selection</strong> — individuals with helpful traits survive and reproduce more</li></ul><div class="hbox tip">💡 Stickleback Fish: In freshwater lakes, fish with LESS armor survived better (faster growth, different predators). The low-armor gene already existed at low frequency — natural selection increased it rapidly because those fish had an advantage!</div><div class="vocab-grid" style="margin-top:12px;"><div class="vocab-item"><div class="vocab-term">Biodiversity</div><div class="vocab-def">Number of different SPECIES in an area. Rainforest = high. Arctic tundra = lower.</div></div><div class="vocab-item"><div class="vocab-term">Disparity</div><div class="vocab-def">Number of different BODY FORMS (shells, backbones, multicellular forms, etc.)</div></div></div>`,
+ci:{q:'Stickleback fish in a freshwater lake rapidly evolved to have LESS armor. What BEST explains this rapid change?',cs:['The fish decided to shed armor to swim faster','Random mutation created armor-free fish out of nothing','Low-armor fish survived and reproduced better in freshwater — the trait already existed and natural selection increased it','The lake water chemically dissolved the armor plates'],a:2,f:'Natural selection! The low-armor gene was already present at low frequency. In freshwater, those fish grew faster and faced different predators → survived and reproduced more → low armor became common in just decades!'}},
+
+{h:'💀 The Five Mass Extinctions',c:`<table class="ctable"><tr><th>Extinction</th><th>When</th><th>% Species Lost</th><th>Main Cause</th></tr><tr><td>Ordovician</td><td>443 mya</td><td>~85%</td><td>Sea level drop, rapid cooling</td></tr><tr><td>Devonian</td><td>360 mya</td><td>~75%</td><td>Volcanic eruptions cooling climate</td></tr><tr><td><strong>Permian "Great Dying"</strong></td><td>252 mya</td><td><strong>90–96%</strong></td><td>Pangea formation, massive volcanism, CO₂ surge</td></tr><tr><td>Triassic</td><td>201 mya</td><td>~76%</td><td>Rapid CO₂ rise from volcanoes, sea level rise</td></tr><tr><td>Cretaceous (K-Pg)</td><td>66 mya</td><td>~75%</td><td>Asteroid impact → killed dinosaurs</td></tr></table><div class="hbox key" style="margin-top:10px;">✅ Silver lining: After mass extinctions, surviving species found abundant resources and space → rapid evolution and diversification! Life bounces back.</div>`,
+ci:{q:'Which mass extinction was the MOST severe, wiping out 90–96% of all species?',cs:['Cretaceous (the asteroid that killed dinosaurs)','Ordovician','Permian ("Great Dying")','Devonian'],a:2,f:'Permian, 252 million years ago! Pangea formation caused massive volcanic activity, CO₂ surge, and extreme global warming. 90–96% of all species died. The dinosaur extinction (K-Pg) is more famous but was less severe!'}},
+
+{h:'♻️ The Carbon Cycle',c:`<p>Carbon moves continuously between Earth's four spheres in a cycle:</p><ul class="blist"><li><strong>Photosynthesis</strong>: Plants take CO₂ from atmosphere → store carbon in biosphere</li><li><strong>Respiration</strong>: Organisms release CO₂ back to atmosphere</li><li><strong>Combustion</strong>: Burning fossil fuels releases ancient stored carbon as CO₂</li><li><strong>Diffusion</strong>: CO₂ exchanges between atmosphere and ocean surface</li><li><strong>Decomposition</strong>: Dead organisms return carbon to soil/rock</li></ul><div class="hbox warn">⚠️ Humans are burning fossil fuels (MILLIONS of years of stored carbon) releasing it in centuries. The ocean can't absorb it all fast enough → CO₂ builds up → warming accelerates.</div><div class="hbox key" style="margin-top:8px;">✅ Carbon SINKS (places that store carbon): Forests, oceans, soil, rocks. But warmer water absorbs LESS CO₂ — so warming oceans make the problem worse! (Positive feedback loop!)</div>`,
+ci:{q:'As ocean temperatures rise, the ocean absorbs LESS CO₂. Rising CO₂ causes more warming. This is…',cs:['The carbon cycle working perfectly as intended','A positive feedback loop that makes warming WORSE over time','A negative feedback loop that will restore balance','Only a concern for marine biologists'],a:1,f:'Positive feedback loop! Warming → ocean absorbs less CO₂ → more CO₂ in atmosphere → more warming → even less CO₂ absorbed. The effect AMPLIFIES itself. A major climate concern!'}}
+],
+quiz:[
+{q:'The algae growing in a pond belongs to which sphere?',cs:['Geosphere','Atmosphere','Biosphere','Hydrosphere'],a:2,f:'Algae = living thing → biosphere! The water = hydrosphere. The pond floor = geosphere. Multiple spheres share the same space.'},
+{q:'What happened at the END of the Mesozoic Era?',cs:['First life appeared on Earth','Humans evolved','Dinosaurs went extinct — K-Pg asteroid impact','Pangea formed and broke apart'],a:2,f:'The K-Pg (Cretaceous-Paleogene) extinction ended the Mesozoic 66 million years ago. An asteroid impact killed ~75% of species including non-avian dinosaurs.'},
+{q:'Natural selection REQUIRES which of the following to work?',cs:['All individuals in a population being identical','Variation among individuals in the population','A human scientist choosing which animals survive','Rapid climate change as a trigger'],a:1,f:'Natural selection REQUIRES variation! Without differences between individuals, there is nothing to select. Those with helpful traits survive and reproduce more, passing on those traits.'},
+{q:'Which process REMOVES CO₂ from the atmosphere?',cs:['Combustion of fossil fuels','Respiration by animals','Photosynthesis by plants','Volcanic eruptions'],a:2,f:'Photosynthesis! Plants take CO₂ from the atmosphere and convert it to sugars, storing the carbon in plant material. Forests and phytoplankton are major carbon sinks.'},
+{q:'What portion of Earth\'s total history does the Precambrian represent?',cs:['About 50%','About 25%','About 88%','About 12%'],a:2,f:'About 88%! Earth is 4.54 billion years old, and the Precambrian lasted until 540 million years ago — nearly 4 billion years, mostly with microscopic life.'}
+]},
+
+6:{color:'var(--u6)',label:'Unit 6',title:'Reviving the Canary',
+topics:[
+{h:'🌡️ Climate Change Effects',c:`<ul class="blist"><li><strong>Melting ice sheets + thermal expansion</strong> → rising sea levels → coastal flooding (Venice, NYC, Miami)</li><li><strong>Habitat loss</strong> for polar animals as ice disappears</li><li><strong>Ocean acidification</strong> → CO₂ dissolves in oceans → lowers pH → bleaches coral reefs → marine animals lose their habitat</li><li><strong>Extreme weather</strong> → more severe storms, droughts, heat waves</li><li><strong>Worse wildfires</strong> → habitat loss + CO₂ release + air quality damage + carbon sinks destroyed</li><li><strong>Food/resource scarcity</strong> → political conflict, climate migration</li><li><strong>Biodiversity loss</strong> → humans may be triggering a 6th mass extinction</li></ul><div class="hbox warn" style="margin-top:10px;">⚠️ Thermal expansion = water molecules spread out as they warm, taking up MORE space. Even without ice melting, sea levels rise as oceans warm!</div>`,
+ci:{q:'When CO₂ levels rise faster than the ocean can absorb, the dissolved CO₂ causes ocean acidification. This most directly harms…',cs:['Polar bears on sea ice','Coral reefs and the marine species that depend on them','Only deep-sea creatures that live near the ocean floor','Land-based food crops primarily'],a:1,f:'Ocean acidification bleaches and destroys coral reefs. Coral reefs are habitat for thousands of marine species — their collapse devastates ocean biodiversity. This is a major real-world concern!'}},
+
+{h:'🔄 Positive vs. Negative Feedback Loops',c:`<div class="vocab-grid"><div class="vocab-item"><div class="vocab-term">Positive Feedback Loop</div><div class="vocab-def">Both variables increase OR decrease together. Change AMPLIFIES. Leads to instability and chaos. (NOT necessarily good!)</div></div><div class="vocab-item"><div class="vocab-term">Negative Feedback Loop</div><div class="vocab-def">One goes up, the other goes down to compensate. Leads to BALANCE and stability. (NOT necessarily bad!)</div></div></div><div class="hbox key" style="margin-top:12px;">✅ Positive loop (climate, bad): Warming → ice melts → less albedo → more heat absorbed → more warming → more ice melts...<br><br>✅ Positive loop (investing, good): Invest money → earn returns → invest more → earn more...<br><br>✅ Negative loop: Body temp rises → sweat → cool down → stop sweating. (Thermostat = classic negative loop!)</div>`,
+ci:{q:'Global temp rises → more AC use → more CO₂ emitted → temp rises more. This is a…',cs:['Negative feedback loop — the AC cools things down','Positive feedback loop — warming and CO₂ both keep increasing and amplifying each other','Balanced cycle that will stabilize eventually','Negative feedback loop because it will eventually stop'],a:1,f:'Positive feedback loop! Warming → more AC → more emissions → more warming. The effect AMPLIFIES itself. This is a real and serious climate concern.'}},
+
+{h:'🛠️ Adaptations vs. Mitigations',c:`<div class="vocab-grid"><div class="vocab-item"><div class="vocab-term">Adaptation</div><div class="vocab-def">Changing lifestyle/systems to DEAL WITH the effects of climate change. Preparing for impacts. Does not stop the cause.</div></div><div class="vocab-item"><div class="vocab-term">Mitigation</div><div class="vocab-def">Actions to REDUCE greenhouse gas emissions. Slowing or stopping climate change at the source.</div></div></div><div class="hbox key" style="margin-top:12px;">✅ Adaptation examples:<br>• Building flood-resistant homes<br>• Developing drought-resistant crops<br>• Relocating coastal communities<br><br>✅ Mitigation examples:<br>• Solar/wind power replacing coal<br>• Electric vehicles, walking, biking, carpooling<br>• No-idling zones (less CO₂ emitted)<br>• Geothermal heating of buildings (no fossil fuels burned)</div>`,
+ci:{q:'A city builds a seawall to protect against rising sea levels. This is an example of…',cs:['Mitigation — it reduces the amount of CO₂ in the atmosphere','Adaptation — it deals with climate impacts without addressing the cause','Both equally — seawalls fight both cause and effect','Neither — it is a completely separate issue from climate'],a:1,f:'Adaptation! The seawall does NOT stop climate change — it helps the city cope with rising seas. To address the CAUSE, you would need mitigation (reducing emissions).'}},
+
+{h:'⚡ Renewable vs. Non-Renewable Energy + Impact',c:`<div class="vocab-grid"><div class="vocab-item"><div class="vocab-term">Non-Renewable</div><div class="vocab-def">Fossil fuels: coal, oil, natural gas. Takes millions of years to form. Burning releases ancient stored carbon as CO₂.</div></div><div class="vocab-item"><div class="vocab-term">Renewable</div><div class="vocab-def">Solar, wind, hydroelectric, geothermal. Replenished naturally. Far fewer carbon emissions.</div></div><div class="vocab-item"><div class="vocab-term">Impact</div><div class="vocab-def">The effect or influence of an action on the environment. Can be positive or negative.</div></div></div><div class="hbox key" style="margin-top:12px;">✅ Key distinctions for the test:<br>• Solar/wind energy = MITIGATION (reduces emissions)<br>• Geothermal building heating = MITIGATION (no fossil fuels)<br>• Flood-resistant buildings = ADAPTATION<br>• Expanding a highway = neither mitigation nor adaptation (still uses fossil fuels)</div>`,
+ci:{q:'Which of the following is a MITIGATION strategy?',cs:['Building levees to protect against flooding','Developing drought-resistant crops for drier climates','Installing solar panels to replace coal power','Relocating a coastal town away from rising sea levels'],a:2,f:'Solar panels = mitigation! They REDUCE greenhouse gas emissions by replacing fossil fuel power plants. The others are adaptations — they deal with climate effects but don\'t stop the cause.'}}
+],
+quiz:[
+{q:'Positive feedback loops in climate systems tend to…',cs:['Stabilize the climate toward equilibrium','Amplify and worsen climate change effects','Balance out negative feedback loops perfectly','Reduce greenhouse gas emissions over time'],a:1,f:'Positive feedback loops AMPLIFY change — they push the system FURTHER from equilibrium. In climate, this is dangerous (ice melts → lower albedo → more warming → more melting).'},
+{q:'A school creates a no-idling zone in the drop-off area. This is…',cs:['Adaptation — adjusting to climate impacts','Mitigation — reducing CO₂ emissions from idling cars','Neither — it has no meaningful climate impact','An example of thermal expansion'],a:1,f:'Mitigation! Idling cars emit CO₂ unnecessarily. Banning idling REDUCES emissions — that\'s mitigation. It addresses the source (emissions), not just the effects.'},
+{q:'Ocean acidification is caused by…',cs:['Too much direct heat from the sun','CO₂ dissolving in ocean water and forming carbonic acid','Glacier melt diluting the salt concentration','Thermal expansion of warm water molecules'],a:1,f:'CO₂ + H₂O → carbonic acid. As atmospheric CO₂ rises, oceans absorb more → increasing acidity → bleaches coral reefs → harms shellfish and other marine life.'},
+{q:'A thermostat turns heat ON when temp drops too low, then OFF when it reaches the set temp. This is…',cs:['Positive feedback — temperature keeps changing forever','Negative feedback — it restores balance','Thermal equilibrium — no energy transfer occurs','An example of mitigation'],a:1,f:'Negative feedback loop! Drop in temp → heat turns on → temp rises → heat turns off → balance restored. Negative feedback stabilizes systems. Classic example!'},
+{q:'Which of the following energy sources is RENEWABLE?',cs:['Coal','Oil','Natural gas','Geothermal energy'],a:3,f:'Geothermal comes from Earth\'s internal heat — essentially limitless on human timescales and produces minimal emissions. Coal, oil, and natural gas are fossil fuels — non-renewable and carbon-heavy.'}
+]}
+};
+
+// ── STATE ──
+let completed=JSON.parse(localStorage.getItem('ipels_done')||'{}');
+let scores=JSON.parse(localStorage.getItem('ipels_scores')||'{}');
+let ciAnswered={};
+let qState={};
+
+function saveState(){localStorage.setItem('ipels_done',JSON.stringify(completed));localStorage.setItem('ipels_scores',JSON.stringify(scores));}
+
+// ── NAV ──
+function showHome(){
+  document.getElementById('home-screen').classList.remove('hidden');
+  document.getElementById('unit-screen').classList.add('hidden');
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  updateBadges();updateProgress();
+}
+function showUnit(n){
+  document.getElementById('home-screen').classList.add('hidden');
+  document.getElementById('unit-screen').classList.remove('hidden');
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  const nb=document.getElementById('nav-u'+n);if(nb)nb.classList.add('active');
+  ciAnswered={};renderUnit(n);window.scrollTo(0,0);
+}
+
+// ── RENDER ──
+function renderUnit(n){
+  const u=U[n];let h='';
+  h+=`<div class="section-header"><div class="section-eyebrow" style="color:${u.color}">${u.label}</div><h2 class="section-title">${u.title}</h2><p class="section-desc">Read each section carefully, then answer the check-in question before moving on. Finish with the unit review quiz!</p></div>`;
+
+  u.topics.forEach((t,i)=>{
+    h+=`<div class="tdiv"><span>${t.h}</span></div>`;
+    h+=`<div class="content-block">${t.c}</div>`;
+    const qid=`ci_${n}_${i}`;
+    h+=`<div class="checkin" id="${qid}"><div class="checkin-label">✏️ Check-In Question</div><div class="checkin-q">${t.ci.q}</div><div class="choices" id="${qid}_c"></div><div class="fbx" id="${qid}_f"></div></div>`;
+  });
+
+  const qzid=`qz_${n}`;
+  h+=`<div id="quiz-section"><div class="tdiv" style="margin-top:40px;"><span>🏆 Unit ${n} Review Quiz</span></div>`;
+  h+=`<div class="quiz-header"><h3>Unit ${n} Final Review</h3><div class="qscore" id="${qzid}_sc">${scores[n]!==undefined?scores[n]+'/'+u.quiz.length+' last attempt':'Not taken yet'}</div></div>`;
+  u.quiz.forEach((q,qi)=>{
+    const qqid=`${qzid}_q${qi}`;
+    h+=`<div class="quiz-q" id="${qqid}"><div class="qqnum">Question ${qi+1} of ${u.quiz.length}</div><div class="qqtext">${q.q}</div><div class="choices" id="${qqid}_c"></div><div class="fbx" id="${qqid}_f"></div></div>`;
+  });
+  h+=`<div id="${qzid}_res" style="display:none;" class="content-block"></div></div>`;
+
+  const prev=n>1?n-1:null,next=n<6?n+1:null;
+  h+=`<div class="nav-controls">${prev?`<button class="btn btn-g" onclick="showUnit(${prev})">← Unit ${prev}</button>`:'<div></div>'}
+  <button class="btn btn-g" onclick="showHome()">🏠 Home</button>
+  ${next?`<button class="btn btn-p" onclick="showUnit(${next})">Unit ${next} →</button>`:`<button class="btn btn-p" onclick="showHome()">🎉 All Done!</button>`}</div>`;
+
+  document.getElementById('unit-screen').innerHTML=h;updateProgress();
+
+  // Attach check-in buttons via addEventListener
+  u.topics.forEach((t,i)=>{
+    const qid=`ci_${n}_${i}`;
+    const container=document.getElementById(qid+'_c');
+    if(!container)return;
+    t.ci.cs.forEach((c,ci)=>{
+      const btn=document.createElement('button');
+      btn.className='cbtn';
+      btn.textContent=c;
+      btn.addEventListener('click',()=>doCI(qid,ci,t.ci.a,t.ci.f));
+      container.appendChild(btn);
+    });
+  });
+
+  // Attach quiz buttons via addEventListener
+  u.quiz.forEach((q,qi)=>{
+    const qqid=`${qzid}_q${qi}`;
+    const container=document.getElementById(qqid+'_c');
+    if(!container)return;
+    q.cs.forEach((c,ci)=>{
+      const btn=document.createElement('button');
+      btn.className='cbtn';
+      btn.textContent=c;
+      btn.addEventListener('click',()=>doQZ(qzid,qi,ci,q.a,q.f,n));
+      container.appendChild(btn);
+    });
+  });
+}
+
+// ── CHECK-IN ──
+function doCI(qid,chosen,correct,fb){
+  if(ciAnswered[qid])return;ciAnswered[qid]=true;
+  document.querySelectorAll(`#${qid}_c .cbtn`).forEach((b,i)=>{
+    b.disabled=true;
+    if(i===correct)b.classList.add('correct');
+    else if(i===chosen&&chosen!==correct)b.classList.add('wrong');
+  });
+  const el=document.getElementById(qid+'_f');el.style.display='block';
+  el.className='fbx '+(chosen===correct?'cfb':'wfb');
+  el.innerHTML=(chosen===correct?'✅ ':'❌ ')+fb;
+}
+
+// ── QUIZ ──
+function doQZ(qzid,qi,chosen,correct,fb,unitN){
+  if(!qState[qzid])qState[qzid]={ans:{},score:0};
+  const qs=qState[qzid];if(qs.ans[qi])return;
+  qs.ans[qi]=true;
+  const qqid=`${qzid}_q${qi}`;
+  document.querySelectorAll(`#${qqid}_c .cbtn`).forEach((b,i)=>{
+    b.disabled=true;
+    if(i===correct)b.classList.add('correct');
+    else if(i===chosen&&chosen!==correct)b.classList.add('wrong');
+    else if(i===correct&&chosen!==correct)b.classList.add('missed');
+  });
+  const el=document.getElementById(qqid+'_f');el.style.display='block';
+  if(chosen===correct){qs.score++;el.className='fbx cfb';el.innerHTML='✅ '+fb;}
+  else{el.className='fbx wfb';el.innerHTML='❌ '+fb;}
+  const total=U[unitN].quiz.length;
+  if(Object.keys(qs.ans).length===total){
+    scores[unitN]=qs.score;completed[unitN]=true;saveState();updateProgress();updateBadges();
+    const sc=document.getElementById(qzid+'_sc');if(sc)sc.textContent=qs.score+'/'+total;
+    const res=document.getElementById(qzid+'_res');
+    if(res){const pct=Math.round(qs.score/total*100);
+    const msg=pct>=80?'🎉 Great work!':pct>=60?'📚 Getting there — keep reviewing!':'💪 Study those sections again!';
+    res.style.display='block';
+    res.innerHTML=`<h3 style="text-align:center;margin-bottom:8px;">${msg}</h3><p style="text-align:center;color:var(--muted);">You got <strong style="color:var(--text)">${qs.score} out of ${total}</strong> (${pct}%)${pct<80?' — scroll up and re-read sections you missed.':' — great job on this unit!'}</p>`;}
+  }
+}
+
+// ── PROGRESS ──
+function updateProgress(){document.getElementById('progress-bar').style.width=(Object.keys(completed).length/6*100)+'%';}
+function updateBadges(){
+  for(let i=1;i<=6;i++){
+    const b=document.getElementById('badge-'+i);if(!b)continue;
+    if(completed[i]){b.textContent='✅ Quiz done — '+(scores[i]||0)+'/'+U[i].quiz.length;b.classList.add('done');}
+    else{b.textContent='Not started';b.classList.remove('done');}
+  }
+}
+updateBadges();updateProgress();
+</script>
+</body>
+</html>
