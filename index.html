@@ -1024,11 +1024,11 @@ function renderIPELSExam(n){
   const exam=IPELS_EXAMS[n];
   const state=ipelsExamState[n];
   let totalQ=ipelsCountQ(exam);
-  let html=`<div class="exam-tabs">
-    <button class="etab ${n===1?'active':''}" onclick="switchIPELSExam(1)">Exam 1</button>
-    <button class="etab ${n===2?'active':''}" onclick="switchIPELSExam(2)">Exam 2</button>
-    <button class="etab ${n===3?'active':''}" onclick="switchIPELSExam(3)">Exam 3</button>
-    <button class="etab ${n===4?'active':''}" onclick="switchIPELSExam(4)">⭐ Official Practice Test</button>
+  let html=`<div class="exam-tabs" id="exam-tabs-bar">
+    <button class="etab ${n===1?'active':''}" id="etab-1">Exam 1</button>
+    <button class="etab ${n===2?'active':''}" id="etab-2">Exam 2</button>
+    <button class="etab ${n===3?'active':''}" id="etab-3">Exam 3</button>
+    <button class="etab ${n===4?'active':''}" id="etab-4">⭐ Official Practice Test</button>
   </div>
   <div class="exam-intro">
     <div>
@@ -1098,6 +1098,12 @@ function renderIPELSExam(n){
 
   document.getElementById('exam-screen').innerHTML=`<div id="exam-content" style="max-width:780px;margin:0 auto;padding:32px 20px 100px">${html}</div>`;
   ipelsUpdateProgress(n);
+
+  // Attach tab listeners
+  [1,2,3,4].forEach(i=>{
+    const tb=document.getElementById('etab-'+i);
+    if(tb) tb.addEventListener('click',()=>switchIPELSExam(i));
+  });
 
   // Attach listeners
   exam.sections.forEach((sec,si)=>{
