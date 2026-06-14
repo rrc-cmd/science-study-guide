@@ -99,6 +99,61 @@
   .phase-box .pd{color:var(--muted);font-size:12px}
   .hidden{display:none!important}
   @media(max-width:480px){#main{padding:24px 16px 80px}.content-block{padding:18px}.checkin{padding:16px}}
+
+  /* ══ PRACTICE EXAMS ══ */
+  #exam-screen{max-width:780px;margin:0 auto;padding:32px 20px 100px}
+  .exam-tabs{display:flex;gap:6px;margin-bottom:28px;border-bottom:1px solid var(--border);padding-bottom:0}
+  .etab{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;padding:10px 18px;border:none;background:none;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;margin-bottom:-1px}
+  .etab:hover{color:var(--text)}
+  .etab.active{color:var(--text);border-bottom-color:var(--u1)}
+  .exam-intro{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:24px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .exam-intro h2{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+  .exam-intro p{color:var(--muted);font-size:13px}
+  .exam-score-big{font-family:'Space Grotesk',sans-serif;font-size:34px;font-weight:800;text-align:center;line-height:1}
+  .exam-score-big span{display:block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+  .epill{display:inline-block;font-size:12px;padding:3px 10px;border-radius:20px;background:var(--surface2);color:var(--muted);font-family:'Space Grotesk',sans-serif;font-weight:600;margin-top:10px;margin-right:6px}
+  .esec-div{display:flex;align-items:center;gap:10px;margin:24px 0 14px}
+  .esec-div span{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;color:var(--muted)}
+  .esec-div::before,.esec-div::after{content:'';flex:1;height:1px;background:var(--border)}
+  .eqcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin-bottom:10px;transition:border-color .2s}
+  .eqcard.eq-correct{border-color:rgba(52,211,153,.4)}
+  .eqcard.eq-wrong{border-color:rgba(248,113,113,.4)}
+  .eqnum{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+  .eqtext{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;line-height:1.45;margin-bottom:13px}
+  .echoices{display:flex;flex-direction:column;gap:6px}
+  .ecbtn{background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:10px 14px;text-align:left;font-size:14px;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;width:100%;display:flex;align-items:center;gap:10px}
+  .ecbtn:hover:not(:disabled){border-color:#555;background:#2a2f38}
+  .ecbtn .eletter{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;color:var(--muted);min-width:18px}
+  .ecbtn.ec-correct{background:rgba(52,211,153,.12)!important;border-color:var(--correct)!important;color:var(--correct)!important}
+  .ecbtn.ec-correct .eletter{color:var(--correct)}
+  .ecbtn.ec-wrong{background:rgba(248,113,113,.12)!important;border-color:var(--wrong)!important;color:var(--wrong)!important}
+  .ecbtn.ec-wrong .eletter{color:var(--wrong)}
+  .ecbtn.ec-missed{background:rgba(52,211,153,.05)!important;border-color:rgba(52,211,153,.25)!important;color:rgba(52,211,153,.55)!important}
+  .efill-wrap{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .efill-input{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 14px;font-size:14px;font-family:'Inter',sans-serif;color:var(--text);min-width:160px;outline:none;transition:border-color .15s}
+  .efill-input:focus{border-color:var(--u1)}
+  .efill-input.ef-correct{border-color:var(--correct)!important;background:rgba(52,211,153,.1)!important;color:var(--correct)!important}
+  .efill-input.ef-wrong{border-color:var(--wrong)!important;background:rgba(248,113,113,.1)!important;color:var(--wrong)!important}
+  .echeck-btn{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;padding:9px 16px;border-radius:8px;border:none;background:var(--u1);color:#0f0f14;cursor:pointer;transition:opacity .15s}
+  .echeck-btn:hover{opacity:.85}
+  .echeck-btn:disabled{opacity:.4;cursor:default}
+  .match-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .match-term-lbl{font-size:14px;color:var(--text);min-width:200px;flex:1;padding-top:8px}
+  .ematch-sel{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;font-family:'Inter',sans-serif;color:var(--text);cursor:pointer;outline:none;flex:1;min-width:160px}
+  .ematch-sel:focus{border-color:var(--u1)}
+  .ematch-sel.em-correct{border-color:var(--correct)!important;background:rgba(52,211,153,.1)!important;color:var(--correct)!important}
+  .ematch-sel.em-wrong{border-color:var(--wrong)!important;background:rgba(248,113,113,.1)!important;color:var(--wrong)!important}
+  .ematch-check-btn{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;padding:9px 16px;border-radius:8px;border:none;background:var(--u1);color:#0f0f14;cursor:pointer;margin-top:10px;transition:opacity .15s}
+  .ematch-check-btn:hover{opacity:.85}
+  .ematch-check-btn:disabled{opacity:.4;cursor:default}
+  .efb{margin-top:9px;padding:10px 13px;border-radius:8px;font-size:13px;line-height:1.6;display:none;border-left:3px solid}
+  .efb.show{display:block}
+  .efb.good{background:rgba(52,211,153,.08);color:#90d8b0;border-color:var(--correct)}
+  .efb.bad{background:rgba(248,113,113,.08);color:#f0a0a0;border-color:var(--wrong)}
+  .exam-submit-bar{position:sticky;bottom:0;background:rgba(15,15,20,.95);backdrop-filter:blur(12px);border-top:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .exam-submit-bar .eprog{font-size:13px;color:var(--muted);font-family:'Space Grotesk',sans-serif}
+  .exam-submit-btn{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;padding:10px 22px;border-radius:8px;border:none;background:var(--correct);color:#0f0f14;cursor:pointer;transition:opacity .15s}
+  .exam-submit-btn:hover{opacity:.88}
 </style>
 </head>
 <body>
@@ -111,6 +166,7 @@
   <button class="nav-btn u4" id="nav-u4" onclick="showUnit(4)">Unit 4</button>
   <button class="nav-btn u5" id="nav-u5" onclick="showUnit(5)">Unit 5</button>
   <button class="nav-btn u6" id="nav-u6" onclick="showUnit(6)">Unit 6</button>
+  <button class="nav-btn" onclick="showExams()" id="nav-exams" style="border-color:var(--u3);color:var(--u3)">📝 Practice Exams</button>
 </nav>
 <div id="progress-bar-wrap"><div id="progress-bar"></div></div>
 <main id="main">
@@ -127,6 +183,8 @@
   </div>
 </section>
 <section id="unit-screen" class="hidden"></section>
+<section id="exam-screen" class="hidden"></section>
+<div class="exam-submit-bar hidden" id="exam-bar"><div class="eprog" id="eprog-text">Answer all questions to see your score</div><button class="exam-submit-btn" onclick="submitIPELSExam()">Submit Exam</button></div>
 </main>
 
 <script>
@@ -294,8 +352,21 @@ function saveState(){localStorage.setItem('ipels_done',JSON.stringify(completed)
 function showHome(){
   document.getElementById('home-screen').classList.remove('hidden');
   document.getElementById('unit-screen').classList.add('hidden');
+  document.getElementById('exam-screen').classList.add('hidden');
+  document.getElementById('exam-bar').classList.add('hidden');
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   updateBadges();updateProgress();
+}
+function showExams(){
+  document.getElementById('home-screen').classList.add('hidden');
+  document.getElementById('unit-screen').classList.add('hidden');
+  document.getElementById('exam-screen').classList.remove('hidden');
+  document.getElementById('exam-bar').classList.remove('hidden');
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('nav-exams').classList.add('active');
+  if(!currentIPELSExam) currentIPELSExam=1;
+  renderIPELSExam(currentIPELSExam);
+  window.scrollTo(0,0);
 }
 function showUnit(n){
   document.getElementById('home-screen').classList.add('hidden');
@@ -412,6 +483,451 @@ function updateBadges(){
   }
 }
 updateBadges();updateProgress();
+
+// ════════════════════════════════════════════
+// IPELS PRACTICE EXAMS
+// ════════════════════════════════════════════
+let currentIPELSExam = 1;
+let ipelsExamState = {1:{}, 2:{}, 3:{}};
+
+const IPELS_EXAMS = {
+1:{
+  title:'Practice Exam 1',
+  subtitle:'Science Practices · Motion · Energy Basics',
+  sections:[
+    {label:'Part A — Multiple Choice: Science Practices', questions:[
+      {type:'mc',text:'In an experiment, which variable goes on the x-axis?',
+       cs:['Dependent variable','Independent variable','Control variable','The variable that changes the most'],
+       a:1,f:'Independent variable → x-axis. Dependent variable → y-axis. "I control the Independent variable."'},
+      {type:'mc',text:'A best-fit line should go through…',
+       cs:['The origin (0,0) every time','Every single data point','The middle of the data, with roughly equal points above and below','Only the highest and lowest data points'],
+       a:2,f:'A best-fit line represents the TREND — it passes through the middle of the data, not necessarily through the origin or every point.'},
+      {type:'mc',text:'Ice cream sales and shark attacks both rise in summer. This is an example of…',
+       cs:['Causation — ice cream attracts sharks','Correlation — both happen more in summer but one does not cause the other','A controlled experiment','Neither — there is no relationship'],
+       a:1,f:'Classic CORRELATION! Both happen more in summer (hot weather → beaches → people). But ice cream does NOT cause shark attacks. Look for the hidden third factor.'},
+      {type:'mc',text:'You measure a sample 4 times and get 9.8g, 9.7g, 9.9g, 9.8g. The true mass is 15g. Your measurements are:',
+       cs:['High accuracy, high precision','High accuracy, low precision','Low accuracy, high precision','Low accuracy, low precision'],
+       a:2,f:'Measurements are very close to each other (high PRECISION) but far from 15g (low ACCURACY). Consistent but wrong!'},
+      {type:'mc',text:'The slope of a distance-time graph represents:',
+       cs:['Acceleration','Position','Speed / velocity','Total distance'],
+       a:2,f:'Slope of a distance (x) vs. time (t) graph = velocity (speed). Slope = Δy/Δx = Δdistance/Δtime = speed.'},
+    ]},
+    {label:'Part B — Fill in the Blank: Formulas & Vocab', questions:[
+      {type:'fill',text:'The formula for slope is: slope = Δy / ___',
+       answer:'Δx',alternates:['delta x','dx','Δx'],
+       f:'Slope = Δy / Δx = (y₂ - y₁) / (x₂ - x₁). It represents the rate of change between the two variables.'},
+      {type:'fill',text:'Long-term average weather patterns over 30+ years is called ___.',
+       answer:'climate',alternates:['Climate'],
+       f:'CLIMATE = long-term average. WEATHER = short-term conditions right now. Climate change refers to shifts in these long-term patterns.'},
+      {type:'fill',text:'How much light a surface reflects is called its ___.',
+       answer:'albedo',alternates:['Albedo'],
+       f:'ALBEDO = reflectivity. Ice has HIGH albedo (reflects light). Asphalt has LOW albedo (absorbs light). Melting ice lowers Earth's albedo → more warming.'},
+    ]},
+    {label:'Part C — Multiple Choice: Motion', questions:[
+      {type:'mc',text:'A runner jogs 400m around a track and ends where they started. Their displacement is:',
+       cs:['400 m','800 m','0 m','200 m'],
+       a:2,f:'Displacement = final position − starting position. They ended where they started → Δx = 0m! Distance was 400m, but displacement is zero.'},
+      {type:'mc',text:'On a position-time graph, a FLAT (horizontal) line means:',
+       cs:['The object is moving at maximum speed','The object is not moving — velocity = 0','The object is accelerating','The object reversed direction'],
+       a:1,f:'A flat line = position is NOT changing over time. No change in position = not moving. Velocity = 0.'},
+      {type:'mc',text:'A car goes from 0 m/s to 20 m/s in 4 seconds. Its acceleration is:',
+       cs:['80 m/s²','5 m/s²','0.2 m/s²','4 m/s²'],
+       a:1,f:'a = Δv/Δt = (20−0)/(4−0) = 20/4 = 5 m/s². The car gains 5 m/s of speed every second.'},
+      {type:'mc',text:'When forces on an object are BALANCED, the object will:',
+       cs:['Always be at rest','Always be moving fast','Never change its velocity','Always accelerate'],
+       a:2,f:'Balanced forces (ΣF = 0) = no change in velocity. The object could be at rest OR moving at constant velocity — but it will NOT speed up or slow down.'},
+    ]},
+    {label:'Part D — Matching: Key Vocabulary', questions:[
+      {type:'match',
+       pairs:[
+         {term:'Independent variable',match:'What the scientist changes; goes on x-axis'},
+         {term:'Dependent variable',match:'What is measured; goes on y-axis'},
+         {term:'Acceleration',match:'Rate of change of velocity'},
+         {term:'Displacement',match:'Straight-line change in position; can be negative'},
+         {term:'Albedo',match:'How much light a surface reflects'},
+       ],
+       f:'These are foundational vocabulary terms from Units 1 and 2!'}
+    ]},
+  ]
+},
+
+2:{
+  title:'Practice Exam 2',
+  subtitle:'Energy Systems · Energy Dynamics · Earth Spheres',
+  sections:[
+    {label:'Part A — Multiple Choice: Energy (Units 3 & 4)', questions:[
+      {type:'mc',text:'A stretched rubber band has what type of energy?',
+       cs:['Kinetic energy (Ek)','Gravitational PE (Eg)','Elastic PE (Eel)','Dissipated energy (Edis)'],
+       a:2,f:'Eel = elastic potential energy! Stored in the SHAPE of a stretched or compressed object. When released, it converts to kinetic energy.'},
+      {type:'mc',text:'A 3 kg ball is held 10 m above the ground (g = 9.8). Its Eg is:',
+       cs:['30 J','98 J','294 J','490 J'],
+       a:2,f:'Eg = mgh = 3 × 9.8 × 10 = 294 J. Always use g = 9.8 on Earth!'},
+      {type:'mc',text:'A ball starts with 500 J of gravitational PE. At the bottom it has 420 J of kinetic energy. The missing 80 J became:',
+       cs:['Destroyed — energy is lost','Dissipated energy (heat, sound from friction)','Elastic potential energy','Gravitational PE again'],
+       a:1,f:'Energy is ALWAYS conserved! The 80 J became dissipated energy — heat from friction and sound. It still exists, just not useful anymore.'},
+      {type:'mc',text:'Which state of matter has the HIGHEST phase energy (Eph)?',
+       cs:['Solid','Liquid','Gas','They all have the same Eph'],
+       a:2,f:'GAS has the highest Eph. Particles are far apart with lots of freedom of movement. More spacing = more Eph. Solids have the least.'},
+      {type:'mc',text:'On a heating curve for water, the FLAT line at 100°C means:',
+       cs:['The water stopped absorbing energy','Water is boiling — Eph increases while temperature stays constant','Temperature is rising slowly','Chemical bonds are breaking'],
+       a:1,f:'Flat line = phase change. ALL energy goes into breaking intermolecular forces (Eph increases). Temperature stays at 100°C until ALL water becomes steam.'},
+      {type:'mc',text:'You rub your hands together and they get warm. What type of energy TRANSFER is this?',
+       cs:['Radiating (R) only','Heating (Q) only','Working (W) only','Both Working (W) and Heating (Q)'],
+       a:3,f:'BOTH! Working (W) = you applied force over distance (rubbing). That work transferred as Heating (Q) = thermal energy into your hands.'},
+    ]},
+    {label:'Part B — Fill in the Blank: Energy Formulas', questions:[
+      {type:'fill',text:'The formula for kinetic energy is Ek = ½m___.',
+       answer:'v²',alternates:['v^2','v2','v²'],
+       f:'Ek = ½mv². Velocity is SQUARED — so doubling speed quadruples kinetic energy! Always square v first.'},
+      {type:'fill',text:'The formula for heat energy is Q = mc___.',
+       answer:'ΔT',alternates:['deltaT','delta T','ΔT','∆T'],
+       f:'Q = mcΔT. Q = heat (J), m = mass (g), c = specific heat capacity, ΔT = change in temperature (°C).'},
+      {type:'fill',text:'A phase change where heat goes INTO a system (like melting) is called ___.',
+       answer:'endothermic',alternates:['Endothermic'],
+       f:'ENDOTHERMIC = heat flows IN. Melting and evaporating are endothermic. EXOTHERMIC = heat flows OUT (freezing, condensing).'},
+      {type:'fill',text:'Energy that spreads out and becomes hard to use (like heat from friction) is called ___ energy.',
+       answer:'dissipated',alternates:['Dissipated'],
+       f:'Edis = dissipated energy. It is NOT destroyed — just not useful anymore. Common forms: heat from friction, sound.'},
+    ]},
+    {label:'Part C — Multiple Choice: Earth Systems', questions:[
+      {type:'mc',text:'A fish living in the ocean belongs to which sphere?',
+       cs:['Geosphere','Hydrosphere','Biosphere','Atmosphere'],
+       a:2,f:'The fish is a LIVING thing → biosphere! The water = hydrosphere. The ocean floor = geosphere. Multiple spheres share the same space.'},
+      {type:'mc',text:'The Precambrian Eon covers approximately what percentage of Earth's history?',
+       cs:['About 25%','About 50%','About 12%','About 88%'],
+       a:3,f:'About 88%! Earth is 4.54 billion years old and the Precambrian lasted until 540 million years ago — nearly 4 billion years of mostly microscopic life.'},
+      {type:'mc',text:'Which mass extinction wiped out 90–96% of all species?',
+       cs:['Cretaceous (K-Pg) — asteroid','Ordovician','Permian ("The Great Dying")','Devonian'],
+       a:2,f:'The PERMIAN extinction 252 million years ago was the worst. Pangea formation caused massive volcanism and CO₂ surge. The dinosaur extinction (K-Pg) is more famous but less severe!'},
+    ]},
+    {label:'Part D — Matching: Energy Modes', questions:[
+      {type:'match',
+       pairs:[
+         {term:'Eg (Gravitational PE)',match:'Energy stored due to height above ground'},
+         {term:'Ek (Kinetic Energy)',match:'Energy of motion — depends on mass and velocity²'},
+         {term:'Eel (Elastic PE)',match:'Energy stored in a stretched or compressed object'},
+         {term:'Eth (Thermal Energy)',match:'Heat energy stored in moving particles'},
+         {term:'Eph (Phase Energy)',match:'Energy stored in particle arrangement and spacing'},
+       ],
+       f:'These five energy storage modes are the backbone of Units 3 and 4!'}
+    ]},
+  ]
+},
+
+3:{
+  title:'Practice Exam 3',
+  subtitle:'Full Final Review — All 6 Units Combined',
+  sections:[
+    {label:'Part A — Mixed Multiple Choice: Units 1–3', questions:[
+      {type:'mc',text:'Which of the following is an example of CAUSATION (not just correlation)?',
+       cs:['Ice cream sales and sunburns both rise in summer','Hospitals and death rates are higher in bigger cities','Burning fossil fuels increases CO₂ in the atmosphere','Cities with more fire stations have more fires'],
+       a:2,f:'Burning fossil fuels → CO₂ increase is CAUSATION — there is a direct, proven chemical mechanism. The others are correlations where a third variable (population, summer, city size) explains both.'},
+      {type:'mc',text:'A velocity-time graph shows a line sloping DOWNWARD from positive velocity toward zero. This means:',
+       cs:['The object is speeding up','The object is slowing down','The object reversed direction suddenly','The object has zero acceleration'],
+       a:1,f:'Downward slope on a v-t graph = negative acceleration = the object is SLOWING DOWN. Its velocity is decreasing toward zero.'},
+      {type:'mc',text:'According to conservation of energy, when a falling ball's Eg decreases…',
+       cs:['Energy is destroyed','Ek increases by the same amount','The ball gains mass','Work becomes negative'],
+       a:1,f:'Energy converts from Eg to Ek. Total energy is constant (ignoring friction). What goes down in Eg goes up in Ek.'},
+      {type:'mc',text:'What does the "c" in Q = mcΔT represent?',
+       cs:['Calories','Change in temperature','Specific heat capacity','Chemical energy'],
+       a:2,f:'c = specific heat capacity — how much energy it takes to raise 1g of a substance by 1°C. Water's c = 4.184 J/g·°C.'},
+    ]},
+    {label:'Part B — Fill in the Blank: Mixed Concepts', questions:[
+      {type:'fill',text:'The law that states energy cannot be created or destroyed is the Law of Conservation of ___.',
+       answer:'Energy',alternates:['energy'],
+       f:'The Law of Conservation of Energy: energy cannot be created or destroyed — only transferred or transformed into other forms.'},
+      {type:'fill',text:'The process by which plants take CO₂ from the atmosphere to make food is called ___.',
+       answer:'photosynthesis',alternates:['Photosynthesis'],
+       f:'Photosynthesis removes CO₂ from the atmosphere and stores carbon in plant material. Forests and phytoplankton are major carbon sinks.'},
+      {type:'fill',text:'A feedback loop where both variables increase together, amplifying change, is called a ___ feedback loop.',
+       answer:'positive',alternates:['Positive'],
+       f:'POSITIVE feedback loop = both variables change in the same direction, amplifying the effect. Example: warming → ice melts → less albedo → more warming. Not necessarily "good"!'},
+      {type:'fill',text:'Taking action to REDUCE greenhouse gas emissions is called ___.',
+       answer:'mitigation',alternates:['Mitigation'],
+       f:'MITIGATION = reducing the cause (emissions). ADAPTATION = dealing with the effects (like building flood walls). Both are needed but they are different strategies.'},
+      {type:'fill',text:'100g of water heats from 20°C to 30°C (c = 4.184 J/g·°C). Q = ___J.',
+       answer:'4184',alternates:['4184 J','4,184','4,184 J'],
+       f:'Q = mcΔT = 100 × 4.184 × (30−20) = 100 × 4.184 × 10 = 4,184 J.'},
+    ]},
+    {label:'Part C — Multiple Choice: Units 5 & 6', questions:[
+      {type:'mc',text:'As ocean temperatures rise, oceans absorb LESS CO₂. This causes more warming. This is a:',
+       cs:['Negative feedback loop — it will stabilize','Positive feedback loop — it amplifies warming','The carbon cycle working normally','An adaptation strategy'],
+       a:1,f:'POSITIVE feedback loop! Warming → ocean absorbs less CO₂ → more CO₂ in atmosphere → more warming → less CO₂ absorbed. The effect amplifies itself.'},
+      {type:'mc',text:'A city builds a seawall to protect against rising sea levels. This is:',
+       cs:['Mitigation — it reduces CO₂','Adaptation — it deals with impacts without fixing the cause','Both equally','Neither'],
+       a:1,f:'ADAPTATION! The seawall does NOT stop climate change — it helps cope with rising seas. Mitigation would mean reducing the emissions causing the sea level rise.'},
+      {type:'mc',text:'Which is a RENEWABLE energy source?',
+       cs:['Coal','Oil','Natural gas','Geothermal energy'],
+       a:3,f:'Geothermal energy comes from Earth's internal heat — essentially limitless on human timescales and produces minimal emissions. Coal, oil, and natural gas are fossil fuels — non-renewable.'},
+      {type:'mc',text:'Stickleback fish in freshwater evolved to have LESS armor quickly because:',
+       cs:['They decided to shed armor to swim faster','The lake water dissolved the armor chemically','Low-armor genes already existed; those fish survived better and reproduced more','A scientist selectively bred them'],
+       a:2,f:'Natural selection! The low-armor allele already existed at low frequency. In freshwater, those fish grew faster and faced different predators → survived and reproduced more → trait spread rapidly.'},
+    ]},
+    {label:'Part D — Matching: Climate & Earth', questions:[
+      {type:'match',
+       pairs:[
+         {term:'Mitigation',match:'Reducing greenhouse gas emissions at the source'},
+         {term:'Adaptation',match:'Adjusting to deal with the effects of climate change'},
+         {term:'Positive feedback loop',match:'Change that amplifies itself and leads to instability'},
+         {term:'Negative feedback loop',match:'Change that counteracts itself and restores balance'},
+         {term:'Carbon sink',match:'A place that absorbs and stores carbon (forests, oceans)'},
+       ],
+       f:'These are the key climate concepts from Unit 6 — make sure you can tell mitigation from adaptation!'}
+    ]},
+    {label:'Part E — Multiple Choice: Comprehensive', questions:[
+      {type:'mc',text:'Which greenhouse gas is NOT naturally produced by living things?',
+       cs:['CO₂ (carbon dioxide)','CH₄ (methane)','H₂O (water vapor)','CFCs (chlorofluorocarbons)'],
+       a:3,f:'CFCs are synthetic chemicals made by humans (from refrigerants, spray cans). CO₂, methane, and water vapor are all naturally produced by living things and natural processes.'},
+      {type:'mc',text:'On a LOL chart, the left "L" represents:',
+       cs:['The final energy state','Energy transferred out of the system','The starting energy in each mode','The system components'],
+       a:2,f:'Left L = STARTING (initial) energy bars showing how much energy is in each mode at the beginning. Right L = ending energy. Middle O = what's in the system and any energy transferred.'},
+      {type:'mc',text:'A 6 kg object moves at 4 m/s. Its kinetic energy is:',
+       cs:['24 J','48 J','96 J','12 J'],
+       a:1,f:'Ek = ½mv² = ½ × 6 × 4² = ½ × 6 × 16 = 48 J. Remember: SQUARE the velocity FIRST, then multiply by mass and ½.'},
+    ]},
+  ]
+}
+};
+
+function switchIPELSExam(n){
+  currentIPELSExam=n;
+  document.querySelectorAll('.etab').forEach((t,i)=>t.classList.toggle('active',i===n-1));
+  renderIPELSExam(n);
+  window.scrollTo(0,0);
+}
+
+function renderIPELSExam(n){
+  const exam=IPELS_EXAMS[n];
+  const state=ipelsExamState[n];
+  let totalQ=ipelsCountQ(exam);
+  let html=`<div class="exam-tabs">
+    <button class="etab ${n===1?'active':''}" onclick="switchIPELSExam(1)">Exam 1</button>
+    <button class="etab ${n===2?'active':''}" onclick="switchIPELSExam(2)">Exam 2</button>
+    <button class="etab ${n===3?'active':''}" onclick="switchIPELSExam(3)">Exam 3</button>
+  </div>
+  <div class="exam-intro">
+    <div>
+      <h2>${exam.title}</h2>
+      <p>${exam.subtitle}</p>
+      <span class="epill">${totalQ} questions</span>
+      <span class="epill">${exam.sections.length} sections</span>
+    </div>
+    <div class="exam-score-big" id="escore-${n}">${ipelsCalcScore(n)}<span>score</span></div>
+  </div>`;
+
+  let qIdx=0;
+  exam.sections.forEach((sec,si)=>{
+    html+=`<div class="esec-div"><span>${sec.label}</span></div>`;
+    sec.questions.forEach((q,qi)=>{
+      const qid=`ie${n}_s${si}_q${qi}`;
+      if(q.type==='mc'){
+        const answered=state[qid]!==undefined;
+        const correct=answered&&state[qid]===q.a;
+        html+=`<div class="eqcard ${answered?(correct?'eq-correct':'eq-wrong'):''}" id="ecard-${qid}">
+          <div class="eqnum">Question ${++qIdx}</div>
+          <div class="eqtext">${q.text}</div>
+          <div class="echoices" id="ech-${qid}"></div>
+          <div class="efb ${answered?(correct?'show good':'show bad'):''}" id="efb-${qid}">${answered?(correct?'✅ ':'❌ ')+q.f:''}</div>
+        </div>`;
+      } else if(q.type==='fill'){
+        const answered=state[qid]!==undefined;
+        const correct=answered&&state[qid]===true;
+        html+=`<div class="eqcard ${answered?(correct?'eq-correct':'eq-wrong'):''}" id="ecard-${qid}">
+          <div class="eqnum">Question ${++qIdx}</div>
+          <div class="eqtext">${q.text}</div>
+          <div class="efill-wrap">
+            <input class="efill-input ${answered?(correct?'ef-correct':'ef-wrong'):''}" id="efill-${qid}" type="text" placeholder="Type your answer..." ${answered?'disabled':''} />
+            <button class="echeck-btn" id="efillbtn-${qid}" ${answered?'disabled':''}>Check</button>
+          </div>
+          <div class="efb ${answered?(correct?'show good':'show bad'):''}" id="efb-${qid}">${answered?(correct?'✅ ':'❌ Correct: <strong>'+q.answer+'</strong>. ')+q.f:''}</div>
+        </div>`;
+      } else if(q.type==='match'){
+        const answered=state[qid]!==undefined;
+        const defs=q.pairs.map(p=>p.match);
+        html+=`<div class="eqcard ${answered?'eq-correct':''}" id="ecard-${qid}">
+          <div class="eqnum">Matching — ${q.pairs.length} items</div>
+          <div class="eqtext">Match each term to its correct definition using the dropdown.</div>`;
+        q.pairs.forEach((p,pi)=>{
+          const rowCorrect=state[`${qid}_r${pi}`]===true;
+          html+=`<div class="match-row">
+            <span class="match-term-lbl">${pi+1}. ${p.term}</span>
+            <select class="ematch-sel ${answered?(rowCorrect?'em-correct':'em-wrong'):''}" id="emsel-${qid}-${pi}" ${answered?'disabled':''}>
+              <option value="">— choose —</option>`;
+          defs.forEach(def=>{
+            html+=`<option value="${def}" ${answered&&def===p.match?'selected':''}>${def}</option>`;
+          });
+          html+=`</select>
+            <div class="efb ${answered?(rowCorrect?'show good':'show bad'):''}" id="efb-match-${qid}-${pi}" style="flex:100%;margin-top:4px;">
+              ${answered?(rowCorrect?'✅ Correct!':'❌ Correct: <strong>'+p.match+'</strong>'):''}
+            </div>
+          </div>`;
+          qIdx+= pi===0?1:0;
+        });
+        qIdx+=q.pairs.length-1;
+        html+=`<button class="ematch-check-btn" id="ematchbtn-${qid}" ${answered?'disabled':''}>Check Matches</button>
+          <div class="efb ${answered?'show good':''}" id="efb-${qid}">${answered?'✅ '+q.f:''}</div>
+        </div>`;
+      }
+    });
+  });
+
+  document.getElementById('exam-screen').innerHTML=`<div id="exam-content" style="max-width:780px;margin:0 auto;padding:32px 20px 100px">${html}</div>`;
+  ipelsUpdateProgress(n);
+
+  // Attach listeners
+  exam.sections.forEach((sec,si)=>{
+    sec.questions.forEach((q,qi)=>{
+      const qid=`ie${n}_s${si}_q${qi}`;
+      if(q.type==='mc'&&ipelsExamState[n][qid]===undefined){
+        const container=document.getElementById('ech-'+qid);
+        if(!container)return;
+        const letters=['A','B','C','D','E'];
+        q.cs.forEach((c,ci)=>{
+          const btn=document.createElement('button');
+          btn.className='ecbtn';
+          btn.innerHTML=`<span class="eletter">${letters[ci]}</span>${c}`;
+          btn.addEventListener('click',()=>ipelsAnswerMC(qid,ci,q.a,q.f,q.cs,n));
+          container.appendChild(btn);
+        });
+      }
+      if(q.type==='fill'&&ipelsExamState[n][qid]===undefined){
+        const btn=document.getElementById('efillbtn-'+qid);
+        const inp=document.getElementById('efill-'+qid);
+        if(btn) btn.addEventListener('click',()=>ipelsCheckFill(qid,q.answer,q.alternates,q.f,n));
+        if(inp) inp.addEventListener('keydown',(e)=>{if(e.key==='Enter')ipelsCheckFill(qid,q.answer,q.alternates,q.f,n);});
+      }
+      if(q.type==='match'&&ipelsExamState[n][qid]===undefined){
+        const btn=document.getElementById('ematchbtn-'+qid);
+        if(btn) btn.addEventListener('click',()=>ipelsCheckMatch(qid,q.pairs,q.f,n));
+      }
+    });
+  });
+}
+
+function ipelsAnswerMC(qid,chosen,correct,fb,choices,examN){
+  const state=ipelsExamState[examN];
+  if(state[qid]!==undefined)return;
+  state[qid]=chosen;
+  const letters=['A','B','C','D','E'];
+  const container=document.getElementById('ech-'+qid);
+  if(container){
+    Array.from(container.children).forEach((btn,i)=>{
+      btn.disabled=true;
+      if(i===correct)btn.classList.add('ec-correct');
+      else if(i===chosen&&chosen!==correct)btn.classList.add('ec-wrong');
+      else if(i===correct&&chosen!==correct)btn.classList.add('ec-missed');
+    });
+  }
+  const fb_el=document.getElementById('efb-'+qid);
+  const card=document.getElementById('ecard-'+qid);
+  const ok=chosen===correct;
+  if(fb_el){fb_el.className='efb show '+(ok?'good':'bad');fb_el.innerHTML=(ok?'✅ ':'❌ ')+fb;}
+  if(card)card.className='eqcard '+(ok?'eq-correct':'eq-wrong');
+  ipelsUpdateProgress(examN);
+  ipelsUpdateScore(examN);
+}
+
+function ipelsCheckFill(qid,answer,alternates,fb,examN){
+  const state=ipelsExamState[examN];
+  if(state[qid]!==undefined)return;
+  const inp=document.getElementById('efill-'+qid);
+  const val=inp?inp.value.trim():'';
+  const accepted=[answer,...(alternates||[])].map(s=>s.toLowerCase().trim());
+  const ok=accepted.includes(val.toLowerCase().trim());
+  state[qid]=ok;
+  if(inp){inp.disabled=true;inp.classList.add(ok?'ef-correct':'ef-wrong');}
+  const btn=document.getElementById('efillbtn-'+qid);
+  if(btn)btn.disabled=true;
+  const fb_el=document.getElementById('efb-'+qid);
+  const card=document.getElementById('ecard-'+qid);
+  if(fb_el){fb_el.className='efb show '+(ok?'good':'bad');fb_el.innerHTML=ok?'✅ '+fb:'❌ Correct: <strong>'+answer+'</strong>. '+fb;}
+  if(card)card.className='eqcard '+(ok?'eq-correct':'eq-wrong');
+  ipelsUpdateProgress(examN);
+  ipelsUpdateScore(examN);
+}
+
+function ipelsCheckMatch(qid,pairs,fb,examN){
+  const state=ipelsExamState[examN];
+  if(state[qid]!==undefined)return;
+  for(let pi=0;pi<pairs.length;pi++){
+    const sel=document.getElementById('emsel-'+qid+'-'+pi);
+    if(!sel||sel.value===''){alert('Please select an answer for every term first!');return;}
+  }
+  let allOk=true;
+  pairs.forEach((p,pi)=>{
+    const sel=document.getElementById('emsel-'+qid+'-'+pi);
+    const ok=sel&&sel.value===p.match;
+    if(!ok)allOk=false;
+    state[`${qid}_r${pi}`]=ok;
+    if(sel){sel.disabled=true;sel.classList.add(ok?'em-correct':'em-wrong');}
+    const rowFb=document.getElementById('efb-match-'+qid+'-'+pi);
+    if(rowFb){rowFb.className='efb show '+(ok?'good':'bad');rowFb.innerHTML=ok?'✅ Correct!':'❌ Correct: <strong>'+p.match+'</strong>';}
+  });
+  state[qid]=true;
+  const btn=document.getElementById('ematchbtn-'+qid);
+  if(btn)btn.disabled=true;
+  const fb_el=document.getElementById('efb-'+qid);
+  if(fb_el){fb_el.style.display='block';fb_el.className='efb show '+(allOk?'good':'bad');fb_el.innerHTML=(allOk?'✅ ':'📝 Review above. ')+fb;}
+  const card=document.getElementById('ecard-'+qid);
+  if(card)card.className='eqcard '+(allOk?'eq-correct':'eq-wrong');
+  ipelsUpdateProgress(examN);
+  ipelsUpdateScore(examN);
+}
+
+function ipelsCountQ(exam){
+  let t=0;
+  exam.sections.forEach(s=>s.questions.forEach(q=>{
+    if(q.type==='mc'||q.type==='fill')t++;
+    else if(q.type==='match')t+=q.pairs.length;
+  }));
+  return t;
+}
+
+function ipelsCountAnswered(n){
+  const exam=IPELS_EXAMS[n];const state=ipelsExamState[n];
+  let answered=0,total=0;
+  exam.sections.forEach((s,si)=>s.questions.forEach((q,qi)=>{
+    const qid=`ie${n}_s${si}_q${qi}`;
+    if(q.type==='mc'||q.type==='fill'){total++;if(state[qid]!==undefined)answered++;}
+    else if(q.type==='match'){q.pairs.forEach((p,pi)=>{total++;if(state[`${qid}_r${pi}`]!==undefined)answered++;});}
+  }));
+  return{answered,total};
+}
+
+function ipelsCalcScore(n){
+  const exam=IPELS_EXAMS[n];const state=ipelsExamState[n];
+  let correct=0,total=0;
+  exam.sections.forEach((s,si)=>s.questions.forEach((q,qi)=>{
+    const qid=`ie${n}_s${si}_q${qi}`;
+    if(q.type==='mc'){total++;if(state[qid]===q.a)correct++;}
+    else if(q.type==='fill'){total++;if(state[qid]===true)correct++;}
+    else if(q.type==='match'){q.pairs.forEach((p,pi)=>{total++;if(state[`${qid}_r${pi}`]===true)correct++;});}
+  }));
+  return total===0?'—':`${correct}/${total}`;
+}
+
+function ipelsUpdateProgress(n){
+  if(n!==currentIPELSExam)return;
+  const{answered,total}=ipelsCountAnswered(n);
+  const el=document.getElementById('eprog-text');
+  if(el)el.textContent=`${answered} of ${total} answered`;
+}
+
+function ipelsUpdateScore(n){
+  const el=document.getElementById('escore-'+n);
+  if(el)el.innerHTML=ipelsCalcScore(n)+'<span>score</span>';
+}
+
+function submitIPELSExam(){
+  const{answered,total}=ipelsCountAnswered(currentIPELSExam);
+  if(answered<total){alert(`You still have ${total-answered} questions to answer!`);return;}
+  const score=ipelsCalcScore(currentIPELSExam);
+  const[c,t]=score.split('/').map(Number);
+  const pct=Math.round(c/t*100);
+  const msg=pct>=90?'🎉 Excellent — you are ready for the final!':pct>=75?'👍 Good work! Review the ones you missed.':pct>=60?'📚 Keep studying — go back through the study guide!':'💪 Review the study guide sections, then try again!';
+  alert(`Exam ${currentIPELSExam} complete!\n\nScore: ${score} (${pct}%)\n\n${msg}`);
+}
+
 </script>
 </body>
 </html>
